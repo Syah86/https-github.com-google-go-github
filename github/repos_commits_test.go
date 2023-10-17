@@ -717,54 +717,54 @@ func TestBranchCommit_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"name": "n",
-		"commit": {
-			"sha": "s",
-			"author": {
-				"date": ` + referenceTimeStr + `,
-				"name": "n",
-				"email": "e",
-				"username": "u"
+		"name":"n",
+		"commit":{
+			"sha":"s",
+			"author":{
+				"date":` + referenceTimeStr + `,
+				"name":"n",
+				"email":"e",
+				"username":"u"
 			},
-			"committer": {
-				"date": ` + referenceTimeStr + `,
-				"name": "n",
-				"email": "e",
-				"username": "u"
+			"committer":{
+				"date":` + referenceTimeStr + `,
+				"name":"n",
+				"email":"e",
+				"username":"u"
 			},
-			"message": "m",
-			"tree": {
-				"sha": "s",
-				"tree": [
+			"message":"m",
+			"tree":{
+				"sha":"s",
+				"tree":[
 					{
-						"sha": "s",
-						"path": "p",
-						"mode": "m",
-						"type": "t",
-						"size": 1,
-						"content": "c",
-						"url": "u"
+						"sha":"s",
+						"path":"p",
+						"mode":"m",
+						"type":"t",
+						"size":1,
+						"content":"c",
+						"url":"u"
 					}
 				],
-				"truncated": false
+				"truncated":false
 			},
-			"stats": {
-				"additions": 1,
-				"deletions": 1,
-				"total": 1
+			"stats":{
+				"additions":1,
+				"deletions":1,
+				"total":1
 			},
-			"html_url": "h",
-			"url": "u",
-			"verification": {
-				"verified": false,
-				"reason": "r",
-				"signature": "s",
-				"payload": "p"
+			"html_url":"h",
+			"url":"u",
+			"verification":{
+				"verified":false,
+				"reason":"r",
+				"signature":"s",
+				"payload":"p"
 			},
-			"node_id": "n",
-			"comment_count": 1
+			"node_id":"n",
+			"comment_count":1
 		},
-		"protected": false
+		"protected":false
 	}`
 
 	testJSONMarshal(t, r, want)
@@ -798,31 +798,31 @@ func TestCommitsComparison_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"base_commit": {
-			"node_id": "nid"
+		"base_commit":{
+			"node_id":"nid"
 		},
-		"merge_base_commit": {
-			"node_id": "nid"
+		"merge_base_commit":{
+			"node_id":"nid"
 		},
-		"status": "status",
-		"ahead_by": 1,
-		"behind_by": 1,
-		"total_commits": 1,
-		"commits": [
+		"status":"status",
+		"ahead_by":1,
+		"behind_by":1,
+		"total_commits":1,
+		"commits":[
 			{
-				"node_id": "nid"
+				"node_id":"nid"
 			}
 		],
-		"files": [
+		"files":[
 			{
-				"sha": "sha"
+				"sha":"sha"
 			}
 		],
-		"html_url": "hurl",
-		"permalink_url": "purl",
-		"diff_url": "durl",
-		"patch_url": "purl",
-		"url": "url"
+		"html_url":"hurl",
+		"permalink_url":"purl",
+		"diff_url":"durl",
+		"patch_url":"purl",
+		"url":"url"
 	}`
 
 	testJSONMarshal(t, r, want)
@@ -846,17 +846,17 @@ func TestCommitFile_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"sha": "sha",
-		"filename": "fn",
-		"additions": 1,
-		"deletions": 1,
-		"changes": 1,
-		"status": "status",
-		"patch": "patch",
-		"blob_url": "burl",
-		"raw_url": "rurl",
-		"contents_url": "curl",
-		"previous_filename": "pf"
+		"sha":"sha",
+		"filename":"fn",
+		"additions":1,
+		"deletions":1,
+		"changes":1,
+		"status":"status",
+		"patch":"patch",
+		"blob_url":"burl",
+		"raw_url":"rurl",
+		"contents_url":"curl",
+		"previous_filename":"pf"
 	}`
 
 	testJSONMarshal(t, r, want)
@@ -872,9 +872,9 @@ func TestCommitStats_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"additions": 1,
-		"deletions": 1,
-		"total": 1
+		"additions":1,
+		"deletions":1,
+		"total":1
 	}`
 
 	testJSONMarshal(t, r, want)
@@ -924,41 +924,41 @@ func TestRepositoryCommit_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"node_id": "nid",
-		"sha": "sha",
-		"commit": {
-			"message": "m"
+		"node_id":"nid",
+		"sha":"sha",
+		"commit":{
+			"message":"m"
 		},
-		"author": {
-			"login": "l"
+		"author":{
+			"login":"l"
 		},
-		"committer": {
-			"login": "l"
+		"committer":{
+			"login":"l"
 		},
-		"parents": [
+		"parents":[
 			{
-				"sha": "s"
+				"sha":"s"
 			}
 		],
-		"html_url": "hurl",
-		"url": "url",
-		"comments_url": "curl",
-		"stats": {
-			"additions": 104,
-			"deletions": 4,
-			"total": 108
+		"html_url":"hurl",
+		"url":"url",
+		"comments_url":"curl",
+		"stats":{
+			"additions":104,
+			"deletions":4,
+			"total":108
 		},
-		"files": [
+		"files":[
 			{
-				"filename": "f",
-				"additions": 10,
-				"deletions": 2,
-				"changes": 12,
-				"status": "s",
-				"patch": "p",
-				"blob_url": "b",
-				"raw_url": "r",
-				"contents_url": "c"
+				"filename":"f",
+				"additions":10,
+				"deletions":2,
+				"changes":12,
+				"status":"s",
+				"patch":"p",
+				"blob_url":"b",
+				"raw_url":"r",
+				"contents_url":"c"
 			}
 		]
 	}`

@@ -1587,7 +1587,7 @@ func TestTeamsService_CreateOrUpdateIDPGroupConnectionsBySlug_empty(t *testing.T
 }
 
 func TestNewTeam_Marshal(t *testing.T) {
-	testJSONMarshal(t, &NewTeam{}, "{}")
+	testJSONMarshal(t, &NewTeam{}, `{"name":""}`)
 
 	u := &NewTeam{
 		Name:         "n",
@@ -1601,14 +1601,20 @@ func TestNewTeam_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"name":           "n",
-		"description":    "d",
-		"maintainers":    ["m1", "m2"],
-		"repo_names":     ["repo1", "repo2"],
-		"parent_team_id": 1,
-		"permission":     "perm",
-		"privacy":        "p",
-		"ldap_dn":        "l"
+		"name":"n",
+		"description":"d",
+		"maintainers":[
+			"m1",
+			"m2"
+		],
+		"repo_names":[
+			"repo1",
+			"repo2"
+		],
+		"parent_team_id":1,
+		"permission":"perm",
+		"privacy":"p",
+		"ldap_dn":"l"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -1658,43 +1664,43 @@ func TestTeams_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"node_id": "n",
-		"name": "n",
-		"description": "d",
-		"url": "u",
-		"slug": "s",
-		"permission": "p",
-		"privacy": "p",
-		"members_count": 1,
-		"repos_count": 1,
-		"members_url": "m",
-		"repositories_url": "r",
-		"organization": {
-			"login": "l",
-			"id": 1,
-			"node_id": "n",
-			"avatar_url": "a",
-			"html_url": "h",
-			"name": "n",
-			"company": "c",
-			"blog": "b",
-			"location": "l",
-			"email": "e"
+		"id":1,
+		"node_id":"n",
+		"name":"n",
+		"description":"d",
+		"url":"u",
+		"slug":"s",
+		"permission":"p",
+		"privacy":"p",
+		"members_count":1,
+		"repos_count":1,
+		"organization":{
+			"login":"l",
+			"id":1,
+			"node_id":"n",
+			"avatar_url":"a",
+			"html_url":"h",
+			"name":"n",
+			"company":"c",
+			"blog":"b",
+			"location":"l",
+			"email":"e"
 		},
-		"parent": {
-			"id": 1,
-			"node_id": "n",
-			"name": "n",
-			"description": "d",
-			"url": "u",
-			"slug": "s",
-			"permission": "p",
-			"privacy": "p",
-			"members_count": 1,
-			"repos_count": 1
+		"members_url":"m",
+		"repositories_url":"r",
+		"parent":{
+			"id":1,
+			"node_id":"n",
+			"name":"n",
+			"description":"d",
+			"url":"u",
+			"slug":"s",
+			"permission":"p",
+			"privacy":"p",
+			"members_count":1,
+			"repos_count":1
 		},
-		"ldap_dn": "l"	
+		"ldap_dn":"l"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -1715,8 +1721,8 @@ func TestInvitation_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"node_id": "test node",
+		"id":1,
+		"node_id":"test node",
 		"login":"login123",
 		"email":"go@github.com",
 		"role":"developer",
@@ -1738,8 +1744,8 @@ func TestIDPGroup_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"group_id": "abc1",
-		"group_name": "test group",
+		"group_id":"abc1",
+		"group_name":"test group",
 		"group_description":"test group descripation"
 	}`
 
@@ -2173,7 +2179,7 @@ func TestTeamsService_RemoveConnectedExternalGroup_notFound(t *testing.T) {
 }
 
 func TestIDPGroupList_Marshal(t *testing.T) {
-	testJSONMarshal(t, &IDPGroupList{}, "{}")
+	testJSONMarshal(t, &IDPGroupList{}, `{"groups":null}`)
 
 	u := &IDPGroupList{
 		Groups: []*IDPGroup{
@@ -2191,16 +2197,16 @@ func TestIDPGroupList_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"groups": [
+		"groups":[
 			{
-				"group_id": "abc1",
-				"group_name": "test group",
-				"group_description": "test group descripation"
+				"group_id":"abc1",
+				"group_name":"test group",
+				"group_description":"test group descripation"
 			},
 			{
-				"group_id": "abc2",
-				"group_name": "test group2",
-				"group_description": "test group descripation2"
+				"group_id":"abc2",
+				"group_name":"test group2",
+				"group_description":"test group descripation2"
 			}
 		]
 	}`
@@ -2219,8 +2225,8 @@ func TestExternalGroupMember_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"member_id": 1,
-		"member_login": "test member",
+		"member_id":1,
+		"member_login":"test member",
 		"member_name":"test member name",
 		"member_email":"test member email"
 	}`
@@ -2256,25 +2262,25 @@ func TestExternalGroup_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"group_id": 123,
-		"group_name": "group1",
-		"updated_at": ` + referenceTimeStr + `,
-		"teams": [
+		"group_id":123,
+		"group_name":"group1",
+		"updated_at":` + referenceTimeStr + `,
+		"teams":[
 			{
-				"team_id": 1,
-				"team_name": "team-test"
+				"team_id":1,
+				"team_name":"team-test"
 			},
 			{
-				"team_id": 2,
-				"team_name": "team-test2"
+				"team_id":2,
+				"team_name":"team-test2"
 			}
 		],
-		"members": [
+		"members":[
 			{
-				"member_id": 1,
-				"member_login": "test",
-				"member_name": "test",
-				"member_email": "test@github.com"
+				"member_id":1,
+				"member_login":"test",
+				"member_name":"test",
+				"member_email":"test@github.com"
 			}
 		]
 	}`
@@ -2291,15 +2297,17 @@ func TestExternalGroupTeam_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"team_id": 123,
-		"team_name": "test"
+		"team_id":123,
+		"team_name":"test"
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
-func TestListExternalGroupsOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &ListExternalGroupsOptions{}, "{}")
+func TestListExternalGroupsOptions_addOptions(t *testing.T) {
+	url := "some/path"
+
+	testAddURLOptions(t, url, &ListExternalGroupsOptions{}, url)
 
 	u := &ListExternalGroupsOptions{
 		DisplayName: String("test"),
@@ -2309,13 +2317,7 @@ func TestListExternalGroupsOptions_Marshal(t *testing.T) {
 		},
 	}
 
-	want := `{
-		"DisplayName": "test",
-		"page":	1,
-		"PerPage":	2
-	}`
-
-	testJSONMarshal(t, u, want)
+	testAddURLOptions(t, url, u, url+`?display_name=test&page=1&per_page=2`)
 }
 
 func TestTeamAddTeamRepoOptions_Marshal(t *testing.T) {
@@ -2325,9 +2327,7 @@ func TestTeamAddTeamRepoOptions_Marshal(t *testing.T) {
 		Permission: "a",
 	}
 
-	want := `{
-		"permission": "a"
-	}`
+	want := `{"permission":"a"}`
 
 	testJSONMarshal(t, u, want)
 }

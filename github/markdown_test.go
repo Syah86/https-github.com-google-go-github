@@ -71,9 +71,9 @@ func TestMarkdownRenderRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"text": "txt",
-		"mode": "mode",
-		"context": "ctx"
+		"text":"txt",
+		"mode":"mode",
+		"context":"ctx"
 	}`
 
 	testJSONMarshal(t, a, want)

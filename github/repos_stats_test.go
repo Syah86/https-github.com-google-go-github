@@ -337,8 +337,12 @@ func TestRepositoryParticipation_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"all": [1],
-		"owner": [1]
+		"all":[
+			1
+		],
+		"owner":[
+			1
+		]
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -354,11 +358,11 @@ func TestWeeklyCommitActivity_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"days": [
+		"days":[
 			1
 		],
-		"total": 1,
-		"week": ` + referenceTimeStr + `
+		"total":1,
+		"week":` + referenceTimeStr + `
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -375,10 +379,10 @@ func TestWeeklyStats_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"w": ` + referenceTimeStr + `,
-		"a": 1,
-		"d": 1,
-		"c": 1
+		"w":` + referenceTimeStr + `,
+		"a":1,
+		"d":1,
+		"c":1
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -401,16 +405,16 @@ func TestContributorStats_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"author": {
-			"id": 1
+		"author":{
+			"id":1
 		},
-		"total": 1,
-		"weeks": [
+		"total":1,
+		"weeks":[
 			{
-				"w": ` + referenceTimeStr + `,
-				"a": 1,
-				"d": 1,
-				"c": 1
+				"w":` + referenceTimeStr + `,
+				"a":1,
+				"d":1,
+				"c":1
 			}
 		]
 	}`

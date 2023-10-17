@@ -337,23 +337,23 @@ func TestNotification_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": "id",
-		"repository": {
-			"id": 1,
-			"url": "u",
-			"name": "n"
+		"id":"id",
+		"repository":{
+			"id":1,
+			"name":"n",
+			"url":"u"
 		},
-		"subject": {
-			"title": "t",
-			"url": "u",
-			"latest_comment_url": "l",
-			"type": "t"
+		"subject":{
+			"title":"t",
+			"url":"u",
+			"latest_comment_url":"l",
+			"type":"t"
 		},
-		"reason": "r",
-		"unread": true,
-		"updated_at": ` + referenceTimeStr + `,
-		"last_read_at": ` + referenceTimeStr + `,
-		"url": "u"
+		"reason":"r",
+		"unread":true,
+		"updated_at":` + referenceTimeStr + `,
+		"last_read_at":` + referenceTimeStr + `,
+		"url":"u"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -370,24 +370,24 @@ func TestNotificationSubject_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"title": "t",
-		"url": "u",
-		"latest_comment_url": "l",
-		"type": "t"
+		"title":"t",
+		"url":"u",
+		"latest_comment_url":"l",
+		"type":"t"
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestMarkReadOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &markReadOptions{}, "{}")
+	testJSONMarshal(t, &markReadOptions{}, `{"last_read_at":"0001-01-01T00:00:00Z"}`)
 
 	u := &markReadOptions{
 		LastReadAt: Timestamp{referenceTime},
 	}
 
 	want := `{
-		"last_read_at": ` + referenceTimeStr + `
+		"last_read_at":` + referenceTimeStr + `
 	}`
 
 	testJSONMarshal(t, u, want)

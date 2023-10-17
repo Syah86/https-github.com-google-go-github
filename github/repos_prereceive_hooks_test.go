@@ -206,10 +206,10 @@ func TestPreReceiveHook_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"name": "name",
-		"enforcement": "e",
-		"configuration_url": "curl"
+		"id":1,
+		"name":"name",
+		"enforcement":"e",
+		"configuration_url":"curl"
 	}`
 
 	testJSONMarshal(t, u, want)

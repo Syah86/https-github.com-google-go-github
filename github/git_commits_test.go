@@ -87,50 +87,50 @@ func TestCommit_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"sha": "s",
-		"author": {
-			"date": ` + referenceTimeStr + `,
-			"name": "n",
-			"email": "e",
-			"username": "u"
+		"sha":"s",
+		"author":{
+			"date":` + referenceTimeStr + `,
+			"name":"n",
+			"email":"e",
+			"username":"u"
 		},
-		"committer": {
-			"date": ` + referenceTimeStr + `,
-			"name": "n",
-			"email": "e",
-			"username": "u"
+		"committer":{
+			"date":` + referenceTimeStr + `,
+			"name":"n",
+			"email":"e",
+			"username":"u"
 		},
-		"message": "m",
-		"tree": {
-			"sha": "s",
-			"tree": [
+		"message":"m",
+		"tree":{
+			"sha":"s",
+			"tree":[
 				{
-					"sha": "s",
-					"path": "p",
-					"mode": "m",
-					"type": "t",
-					"size": 1,
-					"content": "c",
-					"url": "u"
+					"sha":"s",
+					"path":"p",
+					"mode":"m",
+					"type":"t",
+					"size":1,
+					"content":"c",
+					"url":"u"
 				}
 			],
-			"truncated": false
+			"truncated":false
 		},
-		"stats": {
-			"additions": 1,
-			"deletions": 1,
-			"total": 1
+		"stats":{
+			"additions":1,
+			"deletions":1,
+			"total":1
 		},
-		"html_url": "h",
-		"url": "u",
-		"verification": {
-			"verified": false,
-			"reason": "r",
-			"signature": "s",
-			"payload": "p"
+		"html_url":"h",
+		"url":"u",
+		"verification":{
+			"verified":false,
+			"reason":"r",
+			"signature":"s",
+			"payload":"p"
 		},
-		"node_id": "n",
-		"comment_count": 1
+		"node_id":"n",
+		"comment_count":1
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -526,10 +526,10 @@ func TestSignatureVerification_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"verified": true,
-		"reason": "reason",
-		"signature": "sign",
-		"payload": "payload"
+		"verified":true,
+		"reason":"reason",
+		"signature":"sign",
+		"payload":"payload"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -546,10 +546,10 @@ func TestCommitAuthor_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"date": ` + referenceTimeStr + `,
-		"name": "name",
-		"email": "email",
-		"username": "login"
+		"date":` + referenceTimeStr + `,
+		"name":"name",
+		"email":"email",
+		"username":"login"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -578,24 +578,24 @@ func TestCreateCommit_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"author": {
-			"date": ` + referenceTimeStr + `,
-			"name": "name",
-			"email": "email",
-			"username": "login"
+		"author":{
+			"date":` + referenceTimeStr + `,
+			"name":"name",
+			"email":"email",
+			"username":"login"
 		},
-		"committer": {
-			"date": ` + referenceTimeStr + `,
-			"name": "name",
-			"email": "email",
-			"username": "login"
+		"committer":{
+			"date":` + referenceTimeStr + `,
+			"name":"name",
+			"email":"email",
+			"username":"login"
 		},
-		"message": "message",
-		"tree": "tree",
-		"parents": [
+		"message":"message",
+		"tree":"tree",
+		"parents":[
 			"p"
 		],
-		"signature": "sign"
+		"signature":"sign"
 	}`
 
 	testJSONMarshal(t, u, want)

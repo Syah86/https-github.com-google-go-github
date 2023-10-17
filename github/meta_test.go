@@ -40,8 +40,8 @@ func TestAPIMeta_Marshal(t *testing.T) {
 		"dependabot":["d"],
 		"ssh_key_fingerprints":{"a":"f"},
 		"ssh_keys":["k"],
-		"api":["a"],
-		"web":["w"]
+		"web":["w"],
+		"api":["a"]
 	}`
 
 	testJSONMarshal(t, a, want)

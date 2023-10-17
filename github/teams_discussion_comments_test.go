@@ -476,15 +476,15 @@ func TestDiscussionComment_Marshal(t *testing.T) {
 		"updated_at":` + referenceTimeStr + `,
 		"url":"url",
 		"reactions":{
-			"total_count": 10,
-			"+1": 1,
-			"-1": 1,
-			"laugh": 1,
-			"confused": 1,
-			"heart": 2,
-			"hooray": 5,
-			"rocket": 3,
-			"eyes": 9,
+			"total_count":10,
+			"+1":1,
+			"-1":1,
+			"laugh":1,
+			"confused":1,
+			"heart":2,
+			"hooray":5,
+			"rocket":3,
+			"eyes":9,
 			"url":"url"
 		}
 	}`

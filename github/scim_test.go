@@ -345,7 +345,12 @@ func TestSCIMService_DeleteSCIMUserFromOrg(t *testing.T) {
 
 func TestSCIMUserAttributes_Marshal(t *testing.T) {
 	testJSONMarshal(t, &SCIMUserAttributes{}, `{
-		"userName":"","name":{"givenName":"","familyName":""},"emails":null
+		"userName":"",
+		"name":{
+			"givenName":"",
+			"familyName":""
+		},
+		"emails":null
 	}`)
 
 	u := &SCIMUserAttributes{
@@ -370,29 +375,35 @@ func TestSCIMUserAttributes_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"userName": "userName1",
-		"name": {
-			"givenName": "Name1",
-			"familyName": "Fname",
-			"formatted": "formatted name"
+		"userName":"userName1",
+		"name":{
+			"givenName":"Name1",
+			"familyName":"Fname",
+			"formatted":"formatted name"
 		},
-		"displayName": "Name",
-		"emails": [{
-			"value": "value",
-			"primary": false,
-			"type": "type"
-		}],
-		"schemas": ["schema1"],
-		"externalId": "id",
-		"groups": ["group1"],
-		"active": true
+		"displayName":"Name",
+		"emails":[
+			{
+				"value":"value",
+				"primary":false,
+				"type":"type"
+			}
+		],
+		"schemas":[
+			"schema1"
+		],
+		"externalId":"id",
+		"groups":[
+			"group1"
+		],
+		"active":true
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestUpdateAttributeForSCIMUserOperations_Marshal(t *testing.T) {
-	testJSONMarshal(t, &UpdateAttributeForSCIMUserOperations{}, `{}`)
+	testJSONMarshal(t, &UpdateAttributeForSCIMUserOperations{}, `{"op":""}`)
 
 	u := &UpdateAttributeForSCIMUserOperations{
 		Op:   "TestOp",
@@ -400,15 +411,19 @@ func TestUpdateAttributeForSCIMUserOperations_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"op": "TestOp",
-		"path": "path"
+		"op":"TestOp",
+		"path":"path"
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestUpdateAttributeForSCIMUserOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &UpdateAttributeForSCIMUserOptions{}, `{}`)
+	testJSONMarshal(t, &UpdateAttributeForSCIMUserOptions{}, `{
+		"operations":{
+			"op":""
+		}
+	}`)
 
 	u := &UpdateAttributeForSCIMUserOptions{
 		Schemas: []string{"test", "schema"},
@@ -419,10 +434,13 @@ func TestUpdateAttributeForSCIMUserOptions_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"schemas": ["test", "schema"],
-		"operations": {
-			"op": "TestOp",
-			"path": "path"
+		"schemas":[
+			"test",
+			"schema"
+		],
+		"operations":{
+			"op":"TestOp",
+			"path":"path"
 		}
 	}`
 
@@ -430,12 +448,6 @@ func TestUpdateAttributeForSCIMUserOptions_Marshal(t *testing.T) {
 }
 
 func TestListSCIMProvisionedIdentitiesOptions_addOptions(t *testing.T) {
-	testJSONMarshal(t, &ListSCIMProvisionedIdentitiesOptions{}, `{
-		"StartIndex": null,
-		"Count": null,
-		"Filter": null
-	}`)
-
 	url := "some/path"
 
 	testAddURLOptions(t, url, &ListSCIMProvisionedIdentitiesOptions{}, url)
@@ -464,7 +476,8 @@ func TestListSCIMProvisionedIdentitiesOptions_addOptions(t *testing.T) {
 
 func TestSCIMUserName_Marshal(t *testing.T) {
 	testJSONMarshal(t, &SCIMUserName{}, `{
-		"givenName":"","familyName":""
+		"givenName":"",
+		"familyName":""
 	}`)
 
 	u := &SCIMUserName{
@@ -474,10 +487,11 @@ func TestSCIMUserName_Marshal(t *testing.T) {
 	}
 
 	want := `{
-			"givenName": "Name1",
-			"familyName": "Fname",
-			"formatted": "formatted name"	
+		"givenName":"Name1",
+		"familyName":"Fname",
+		"formatted":"formatted name"
 	}`
+
 	testJSONMarshal(t, u, want)
 }
 
@@ -490,8 +504,8 @@ func TestSCIMMeta_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"resourceType": "test",
-		"location": "test"
+		"resourceType":"test",
+		"location":"test"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -530,28 +544,39 @@ func TestSCIMProvisionedIdentities_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"schemas": ["test", "schema"],
-		"totalResults": 1,
-		"itemsPerPage": 2,
-		"startIndex": 1,
-		"Resources": [{
-			"userName": "SCIM",
-			"name": {
-				"givenName": "scim",
-				"familyName": "test",
-				"formatted": "SCIM"
-			},
-			"displayName": "Test SCIM",
-			"emails": [{
-				"value": "test",
-				"primary": true,
-				"type": "test"
-			}],
-			"schemas": ["schema1"],
-			"externalId": "id",
-			"groups": ["group1"],
-			"active": true
-		}]
+		"schemas":[
+			"test",
+			"schema"
+		],
+		"totalResults":1,
+		"itemsPerPage":2,
+		"startIndex":1,
+		"Resources":[
+			{
+				"userName":"SCIM",
+				"name":{
+					"givenName":"scim",
+					"familyName":"test",
+					"formatted":"SCIM"
+				},
+				"displayName":"Test SCIM",
+				"emails":[
+					{
+						"value":"test",
+						"primary":true,
+						"type":"test"
+					}
+				],
+				"schemas":[
+					"schema1"
+				],
+				"externalId":"id",
+				"groups":[
+					"group1"
+				],
+				"active":true
+			}
+		]
 	}`
 
 	testJSONMarshal(t, u, want)

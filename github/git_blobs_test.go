@@ -184,12 +184,12 @@ func TestBlob_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"content": "content",
-		"encoding": "encoding",
-		"sha": "sha",
-		"size": 1,
-		"url": "url",
-		"node_id": "nid"
+		"content":"content",
+		"encoding":"encoding",
+		"sha":"sha",
+		"size":1,
+		"url":"url",
+		"node_id":"nid"
 	}`
 
 	testJSONMarshal(t, u, want)

@@ -659,7 +659,7 @@ func TestActionsService_DeleteEnvVariable(t *testing.T) {
 }
 
 func TestActionVariable_Marshal(t *testing.T) {
-	testJSONMarshal(t, &ActionsVariable{}, "{}")
+	testJSONMarshal(t, &ActionsVariable{}, `{"name":"","value":""}`)
 
 	av := &ActionsVariable{
 		Name:                    "n",
@@ -672,13 +672,13 @@ func TestActionVariable_Marshal(t *testing.T) {
 	}
 
 	want := fmt.Sprintf(`{
-		"name": "n",
-		"value": "v",
-		"created_at": %s,
-		"updated_at": %s,
-		"visibility": "v",
-		"selected_repositories_url": "s",
-		"selected_repository_ids": [1,2,3]
+		"name":"n",
+		"value":"v",
+		"created_at":%s,
+		"updated_at":%s,
+		"visibility":"v",
+		"selected_repositories_url":"s",
+		"selected_repository_ids":[1,2,3]
 	}`, referenceTimeStr, referenceTimeStr)
 
 	fmt.Println(want)

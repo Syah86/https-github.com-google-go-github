@@ -746,14 +746,14 @@ func TestRepositoryReleaseRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"tag_name": "tn",
-		"target_commitish": "tc",
-		"name": "name",
-		"body": "body",
-		"draft": false,
-		"prerelease": false,
-		"make_latest": "legacy",
-		"discussion_category_name": "dcn"
+		"tag_name":"tn",
+		"target_commitish":"tc",
+		"name":"name",
+		"body":"body",
+		"draft":false,
+		"prerelease":false,
+		"make_latest":"legacy",
+		"discussion_category_name":"dcn"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -779,21 +779,21 @@ func TestReleaseAsset_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"url": "url",
-		"name": "name",
-		"label": "label",
-		"state": "state",
-		"content_type": "ct",
-		"size": 1,
-		"download_count": 1,
-		"created_at": ` + referenceTimeStr + `,
-		"updated_at": ` + referenceTimeStr + `,
-		"browser_download_url": "bdu",
-		"uploader": {
-			"id": 1
+		"id":1,
+		"url":"url",
+		"name":"name",
+		"label":"label",
+		"state":"state",
+		"content_type":"ct",
+		"size":1,
+		"download_count":1,
+		"created_at":` + referenceTimeStr + `,
+		"updated_at":` + referenceTimeStr + `,
+		"browser_download_url":"bdu",
+		"uploader":{
+			"id":1
 		},
-		"node_id": "nid"
+		"node_id":"nid"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -826,39 +826,39 @@ func TestRepositoryRelease_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"tag_name": "tn",
-		"target_commitish": "tc",
-		"name": "name",
-		"body": "body",
-		"draft": false,
-		"prerelease": false,
-		"make_latest": "legacy",
-		"discussion_category_name": "dcn",
-		"id": 1,
-		"created_at": ` + referenceTimeStr + `,
-		"published_at": ` + referenceTimeStr + `,
-		"url": "url",
-		"html_url": "hurl",
-		"assets_url": "aurl",
-		"assets": [
+		"tag_name":"tn",
+		"target_commitish":"tc",
+		"name":"name",
+		"body":"body",
+		"draft":false,
+		"prerelease":false,
+		"make_latest":"legacy",
+		"discussion_category_name":"dcn",
+		"id":1,
+		"created_at":` + referenceTimeStr + `,
+		"published_at":` + referenceTimeStr + `,
+		"url":"url",
+		"html_url":"hurl",
+		"assets_url":"aurl",
+		"assets":[
 			{
-				"id": 1
+				"id":1
 			}
 		],
-		"upload_url": "uurl",
-		"zipball_url": "zurl",
-		"tarball_url": "turl",
-		"author": {
-			"id": 1
+		"upload_url":"uurl",
+		"zipball_url":"zurl",
+		"tarball_url":"turl",
+		"author":{
+			"id":1
 		},
-		"node_id": "nid"
+		"node_id":"nid"
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestGenerateNotesOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &GenerateNotesOptions{}, "{}")
+	testJSONMarshal(t, &GenerateNotesOptions{}, `{"tag_name":""}`)
 
 	u := &GenerateNotesOptions{
 		TagName:         "tag_name",
@@ -867,9 +867,9 @@ func TestGenerateNotesOptions_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"tag_name":          "tag_name",
-		"previous_tag_name": "previous_tag_name",
-		"target_commitish":  "target_commitish"
+		"tag_name":"tag_name",
+		"previous_tag_name":"previous_tag_name",
+		"target_commitish":"target_commitish"
 	}`
 
 	testJSONMarshal(t, u, want)

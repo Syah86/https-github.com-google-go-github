@@ -189,8 +189,8 @@ func TestOIDCSubjectClaimCustomTemplate_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"use_default": false,
-		"include_claim_keys": [
+		"use_default":false,
+		"include_claim_keys":[
 			"s"
 		]
 	}`

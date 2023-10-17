@@ -476,16 +476,16 @@ func TestWorkflow_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"node_id": "nid",
-		"name": "n",
-		"path": "p",
-		"state": "s",
-		"created_at": ` + referenceTimeStr + `,
-		"updated_at": ` + referenceTimeStr + `,
-		"url": "u",
-		"html_url": "h",
-		"badge_url": "b"
+		"id":1,
+		"node_id":"nid",
+		"name":"n",
+		"path":"p",
+		"state":"s",
+		"created_at":` + referenceTimeStr + `,
+		"updated_at":` + referenceTimeStr + `,
+		"url":"u",
+		"html_url":"h",
+		"badge_url":"b"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -513,19 +513,21 @@ func TestWorkflows_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"total_count": 1,
-		"workflows": [{
-			"id": 1,
-			"node_id": "nid",
-			"name": "n",
-			"path": "p",
-			"state": "s",
-			"created_at": ` + referenceTimeStr + `,
-			"updated_at": ` + referenceTimeStr + `,
-			"url": "u",
-			"html_url": "h",
-			"badge_url": "b"
-		}]
+		"total_count":1,
+		"workflows":[
+			{
+				"id":1,
+				"node_id":"nid",
+				"name":"n",
+				"path":"p",
+				"state":"s",
+				"created_at":` + referenceTimeStr + `,
+				"updated_at":` + referenceTimeStr + `,
+				"url":"u",
+				"html_url":"h",
+				"badge_url":"b"
+			}
+		]
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -538,9 +540,7 @@ func TestWorkflowBill_Marshal(t *testing.T) {
 		TotalMS: Int64(1),
 	}
 
-	want := `{
-		"total_ms": 1
-	}`
+	want := `{"total_ms":1}`
 
 	testJSONMarshal(t, u, want)
 }
@@ -561,14 +561,14 @@ func TestWorkflowBillMap_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"UBUNTU": {
-			"total_ms": 1
+		"MACOS":{
+			"total_ms":1
 		},
-		"MACOS": {
-			"total_ms": 1
+		"UBUNTU":{
+			"total_ms":1
 		},
-		"WINDOWS": {
-			"total_ms": 1
+		"WINDOWS":{
+			"total_ms":1
 		}
 	}`
 
@@ -593,15 +593,15 @@ func TestWorkflowUsage_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"billable": {
-			"UBUNTU": {
-				"total_ms": 1
+		"billable":{
+			"MACOS":{
+				"total_ms":1
 			},
-			"MACOS": {
-				"total_ms": 1
+			"UBUNTU":{
+				"total_ms":1
 			},
-			"WINDOWS": {
-				"total_ms": 1
+			"WINDOWS":{
+				"total_ms":1
 			}
 		}
 	}`
@@ -610,7 +610,7 @@ func TestWorkflowUsage_Marshal(t *testing.T) {
 }
 
 func TestCreateWorkflowDispatchEventRequest_Marshal(t *testing.T) {
-	testJSONMarshal(t, &CreateWorkflowDispatchEventRequest{}, "{}")
+	testJSONMarshal(t, &CreateWorkflowDispatchEventRequest{}, `{"ref":""}`)
 
 	inputs := make(map[string]interface{}, 0)
 	inputs["key"] = "value"
@@ -621,9 +621,9 @@ func TestCreateWorkflowDispatchEventRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"ref": "r",
-		"inputs": {
-			"key": "value"
+		"ref":"r",
+		"inputs":{
+			"key":"value"
 		}
 	}`
 

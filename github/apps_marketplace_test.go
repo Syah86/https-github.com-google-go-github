@@ -256,19 +256,21 @@ func TestMarketplacePlan_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"url": "u",
-		"accounts_url": "au",
-		"id": 1,
-		"number": 1,
-		"name": "n",
-		"description": "d",
-		"monthly_price_in_cents": 1,
-		"yearly_price_in_cents": 1,
-		"price_model": "pm",
-		"unit_name": "un",
-		"bullets": ["b"],
-		"state": "s",
-		"has_free_trial": false
+		"url":"u",
+		"accounts_url":"au",
+		"id":1,
+		"number":1,
+		"name":"n",
+		"description":"d",
+		"monthly_price_in_cents":1,
+		"yearly_price_in_cents":1,
+		"price_model":"pm",
+		"unit_name":"un",
+		"bullets":[
+			"b"
+		],
+		"state":"s",
+		"has_free_trial":false
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -302,27 +304,29 @@ func TestMarketplacePurchase_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"billing_cycle": "bc",
-		"next_billing_date": ` + referenceTimeStr + `,
-		"unit_count": 1,
-		"plan": {
-			"url": "u",
-			"accounts_url": "au",
-			"id": 1,
-			"number": 1,
-			"name": "n",
-			"description": "d",
-			"monthly_price_in_cents": 1,
-			"yearly_price_in_cents": 1,
-			"price_model": "pm",
-			"unit_name": "un",
-			"bullets": ["b"],
-			"state": "s",
-			"has_free_trial": false
-			},
-		"on_free_trial": false,
-		"free_trial_ends_on": ` + referenceTimeStr + `,
-		"updated_at": ` + referenceTimeStr + `
+		"billing_cycle":"bc",
+		"next_billing_date":` + referenceTimeStr + `,
+		"unit_count":1,
+		"plan":{
+			"url":"u",
+			"accounts_url":"au",
+			"id":1,
+			"number":1,
+			"name":"n",
+			"description":"d",
+			"monthly_price_in_cents":1,
+			"yearly_price_in_cents":1,
+			"price_model":"pm",
+			"unit_name":"un",
+			"bullets":[
+				"b"
+			],
+			"state":"s",
+			"has_free_trial":false
+		},
+		"on_free_trial":false,
+		"free_trial_ends_on":` + referenceTimeStr + `,
+		"updated_at":` + referenceTimeStr + `
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -353,24 +357,26 @@ func TestMarketplacePendingChange_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"effective_date": ` + referenceTimeStr + `,
-		"unit_count": 1,
-		"id": 1,
-		"plan": {
-			"url": "u",
-			"accounts_url": "au",
-			"id": 1,
-			"number": 1,
-			"name": "n",
-			"description": "d",
-			"monthly_price_in_cents": 1,
-			"yearly_price_in_cents": 1,
-			"price_model": "pm",
-			"unit_name": "un",
-			"bullets": ["b"],
-			"state": "s",
-			"has_free_trial": false
-			}
+		"effective_date":` + referenceTimeStr + `,
+		"unit_count":1,
+		"id":1,
+		"plan":{
+			"url":"u",
+			"accounts_url":"au",
+			"id":1,
+			"number":1,
+			"name":"n",
+			"description":"d",
+			"monthly_price_in_cents":1,
+			"yearly_price_in_cents":1,
+			"price_model":"pm",
+			"unit_name":"un",
+			"bullets":[
+				"b"
+			],
+			"state":"s",
+			"has_free_trial":false
+		}
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -431,52 +437,56 @@ func TestMarketplacePlanAccount_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"url": "u",
-		"type": "t",
-		"id": 1,
-		"login": "l",
-		"organization_billing_email": "obe",
-		"marketplace_purchase": {
-			"billing_cycle": "bc",
-			"next_billing_date": ` + referenceTimeStr + `,
-			"unit_count": 1,
-			"plan": {
-				"url": "u",
-				"accounts_url": "au",
-				"id": 1,
-				"number": 1,
-				"name": "n",
-				"description": "d",
-				"monthly_price_in_cents": 1,
-				"yearly_price_in_cents": 1,
-				"price_model": "pm",
-				"unit_name": "un",
-				"bullets": ["b"],
-				"state": "s",
-				"has_free_trial": false
-				},
-			"on_free_trial": false,
-			"free_trial_ends_on": ` + referenceTimeStr + `,
-			"updated_at": ` + referenceTimeStr + `
+		"url":"u",
+		"type":"t",
+		"id":1,
+		"login":"l",
+		"organization_billing_email":"obe",
+		"marketplace_purchase":{
+			"billing_cycle":"bc",
+			"next_billing_date":` + referenceTimeStr + `,
+			"unit_count":1,
+			"plan":{
+				"url":"u",
+				"accounts_url":"au",
+				"id":1,
+				"number":1,
+				"name":"n",
+				"description":"d",
+				"monthly_price_in_cents":1,
+				"yearly_price_in_cents":1,
+				"price_model":"pm",
+				"unit_name":"un",
+				"bullets":[
+					"b"
+				],
+				"state":"s",
+				"has_free_trial":false
+			},
+			"on_free_trial":false,
+			"free_trial_ends_on":` + referenceTimeStr + `,
+			"updated_at":` + referenceTimeStr + `
 		},
-		"marketplace_pending_change": {
-			"effective_date": ` + referenceTimeStr + `,
-			"unit_count": 1,
-			"id": 1,
-			"plan": {
-				"url": "u",
-				"accounts_url": "au",
-				"id": 1,
-				"number": 1,
-				"name": "n",
-				"description": "d",
-				"monthly_price_in_cents": 1,
-				"yearly_price_in_cents": 1,
-				"price_model": "pm",
-				"unit_name": "un",
-				"bullets": ["b"],
-				"state": "s",
-				"has_free_trial": false
+		"marketplace_pending_change":{
+			"effective_date":` + referenceTimeStr + `,
+			"unit_count":1,
+			"id":1,
+			"plan":{
+				"url":"u",
+				"accounts_url":"au",
+				"id":1,
+				"number":1,
+				"name":"n",
+				"description":"d",
+				"monthly_price_in_cents":1,
+				"yearly_price_in_cents":1,
+				"price_model":"pm",
+				"unit_name":"un",
+				"bullets":[
+					"b"
+				],
+				"state":"s",
+				"has_free_trial":false
 			}
 		}
 	}`

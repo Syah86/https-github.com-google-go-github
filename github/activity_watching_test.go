@@ -272,13 +272,13 @@ func TestSubscription_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"subscribed": true,
-		"ignored": false,
-		"reason": "r",
-		"created_at": ` + referenceTimeStr + `,
-		"url": "u",
-		"repository_url": "ru",
-		"thread_url": "tu"
+		"subscribed":true,
+		"ignored":false,
+		"reason":"r",
+		"created_at":` + referenceTimeStr + `,
+		"url":"u",
+		"repository_url":"ru",
+		"thread_url":"tu"
 	}`
 
 	testJSONMarshal(t, u, want)

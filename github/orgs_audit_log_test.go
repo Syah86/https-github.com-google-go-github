@@ -173,8 +173,10 @@ func TestOrganizationService_GetAuditLog(t *testing.T) {
 	})
 }
 
-func TestGetAuditLogOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &GetAuditLogOptions{}, "{}")
+func TestGetAuditLogOptions_addOptions(t *testing.T) {
+	url := "some/path"
+
+	testAddURLOptions(t, url, &GetAuditLogOptions{}, url)
 
 	u := &GetAuditLogOptions{
 		Phrase:  String("p"),
@@ -188,17 +190,7 @@ func TestGetAuditLogOptions_Marshal(t *testing.T) {
 		},
 	}
 
-	want := `{
-		"phrase": "p",
-		"include": "i",
-		"order": "o",
-		"Page": "p",
-		"PerPage": 1,
-		"After": "a",
-		"Before": "b"
-	}`
-
-	testJSONMarshal(t, u, want)
+	testAddURLOptions(t, url, u, url+`?after=a&before=b&include=i&order=o&page=p&per_page=1&phrase=p`)
 }
 
 func TestHookConfig_Marshal(t *testing.T) {
@@ -211,9 +203,9 @@ func TestHookConfig_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"content_type": "ct",
-		"insecure_ssl": "ct",
-		"url": "url"
+		"content_type":"ct",
+		"insecure_ssl":"ct",
+		"url":"url"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -308,101 +300,103 @@ func TestAuditEntry_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"action": "a",
-		"active": false,
-		"active_was": false,
-		"actor": "ac",
-		"actor_ip": "aip",
-		"actor_location": {
-			"country_code": "alcc"
+		"actor_ip":"aip",
+		"action":"a",
+		"active":false,
+		"active_was":false,
+		"actor":"ac",
+		"actor_location":{
+			"country_code":"alcc"
 		},
-		"blocked_user": "bu",
-		"business": "b",
-		"cancelled_at": ` + referenceTimeStr + `,
-		"completed_at": ` + referenceTimeStr + `,
-		"conclusion": "c",
-		"config": {
-			"url": "s"
+		"blocked_user":"bu",
+		"business":"b",
+		"cancelled_at":` + referenceTimeStr + `,
+		"completed_at":` + referenceTimeStr + `,
+		"conclusion":"c",
+		"config":{
+			"url":"s"
 		},
-		"config_was": {
-			"url": "s"
+		"config_was":{
+			"url":"s"
 		},
-		"content_type": "ct",
-		"created_at": ` + referenceTimeStr + `,
-		"deploy_key_fingerprint": "dkf",
-		"_document_id": "did",
-		"emoji": "e",
-		"environment_name": "en",
-		"event": "e",
-		"events": [
+		"content_type":"ct",
+		"created_at":` + referenceTimeStr + `,
+		"deploy_key_fingerprint":"dkf",
+		"_document_id":"did",
+		"emoji":"e",
+		"environment_name":"en",
+		"event":"e",
+		"events":[
 			"s"
 		],
-		"events_were": [
+		"events_were":[
 			"s"
 		],
-		"explanation": "e",
-		"external_identity_nameid": "ein",
-		"external_identity_username": "eiu",
-		"fingerprint": "f",
-		"hashed_token": "ht",
-		"head_branch": "hb",
-		"head_sha": "hsha",
-		"hook_id": 1,
-		"is_hosted_runner": false,
-		"job_name": "jn",
-		"limited_availability": false,
-		"message": "m",
-		"name": "n",
-		"old_permission": "op",
-		"old_user": "ou",
-		"openssh_public_key": "osshpk",
-		"org": "o",
-		"org_id": 1,
-		"permission": "p",
-		"previous_visibility": "pv",
-		"programmatic_access_type": "pat",
-		"pull_request_id": 1,
-		"pull_request_title": "prt",
-		"pull_request_url": "pru",
-		"reasons": [{
-			"code": "c",
-			"message": "m"
-		}],
-		"read_only": "ro",
-		"repo": "r",
-		"repository": "repo",
-		"repository_public": false,
-		"run_attempt": 1,
-		"runner_group_id": 1,
-		"runner_group_name": "rgn",
-		"runner_id": 1,
-		"runner_labels": [
+		"explanation":"e",
+		"external_identity_nameid":"ein",
+		"external_identity_username":"eiu",
+		"fingerprint":"f",
+		"hashed_token":"ht",
+		"head_branch":"hb",
+		"head_sha":"hsha",
+		"hook_id":1,
+		"is_hosted_runner":false,
+		"job_name":"jn",
+		"limited_availability":false,
+		"message":"m",
+		"name":"n",
+		"old_user":"ou",
+		"old_permission":"op",
+		"openssh_public_key":"osshpk",
+		"org":"o",
+		"org_id":1,
+		"permission":"p",
+		"previous_visibility":"pv",
+		"programmatic_access_type":"pat",
+		"pull_request_id":1,
+		"pull_request_title":"prt",
+		"pull_request_url":"pru",
+		"read_only":"ro",
+		"reasons":[
+			{
+				"code":"c",
+				"message":"m"
+			}
+		],
+		"repo":"r",
+		"repository":"repo",
+		"repository_public":false,
+		"run_attempt":1,
+		"runner_group_id":1,
+		"runner_group_name":"rgn",
+		"runner_id":1,
+		"runner_labels":[
 			"s"
 		],
-		"runner_name": "rn",
-		"secrets_passed": [
+		"runner_name":"rn",
+		"secrets_passed":[
 			"s"
 		],
-		"source_version": "sv",
-		"started_at": ` + referenceTimeStr + `,
-		"target_login": "tl",
-		"target_version": "tv",
-		"team": "t",
-		"@timestamp": ` + referenceTimeStr + `,
-		"token_id": 1,
-		"token_scopes": "ts",
-		"topic": "tp",
-		"transport_protocol_name": "tpn",
-		"transport_protocol": 1,
-		"trigger_id": 1,
-		"user": "u",
-		"user_agent": "ua",
-		"visibility": "v",
-		"workflow_id": 1,
-		"workflow_run_id": 1,
-		"data": {
-			"old_name": "on",
-			"old_login": "ol"
+		"source_version":"sv",
+		"started_at":` + referenceTimeStr + `,
+		"target_login":"tl",
+		"target_version":"tv",
+		"team":"t",
+		"@timestamp":` + referenceTimeStr + `,
+		"token_id":1,
+		"token_scopes":"ts",
+		"topic":"tp",
+		"transport_protocol_name":"tpn",
+		"transport_protocol":1,
+		"trigger_id":1,
+		"user":"u",
+		"user_agent":"ua",
+		"visibility":"v",
+		"workflow_id":1,
+		"workflow_run_id":1,
+		"data":{
+			"old_name":"on",
+			"old_login":"ol"
 		}
 	}`
 

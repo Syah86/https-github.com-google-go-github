@@ -211,9 +211,9 @@ func TestTrafficReferrer_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"referrer" : "referrer",
-		"count" : 0,
-		"uniques" : 0
+		"referrer":"referrer",
+		"count":0,
+		"uniques":0
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -233,13 +233,15 @@ func TestTrafficViews_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"views": [{
-			"timestamp": "2016-05-31T16:00:00.000Z",
-			"count": 7,
-			"uniques": 6
-		}],
-		"count" : 0,
-		"uniques" : 0
+		"views":[
+			{
+				"timestamp":"2016-05-31T16:00:00Z",
+				"count":7,
+				"uniques":6
+			}
+		],
+		"count":0,
+		"uniques":0
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -259,13 +261,15 @@ func TestTrafficClones_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"clones": [{
-			"timestamp": "2021-10-29T16:00:00.000Z",
-			"count": 1,
-			"uniques": 1
-		}],
-		"count" : 0,
-		"uniques" : 0
+		"clones":[
+			{
+				"timestamp":"2021-10-29T16:00:00Z",
+				"count":1,
+				"uniques":1
+			}
+		],
+		"count":0,
+		"uniques":0
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -282,10 +286,10 @@ func TestTrafficPath_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"path" : "test/path",
-		"title": "test",
-		"count": 2,
-		"uniques": 3
+		"path":"test/path",
+		"title":"test",
+		"count":2,
+		"uniques":3
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -300,25 +304,23 @@ func TestTrafficData_Marshal(t *testing.T) {
 		Uniques:   Int(6),
 	}
 
-	want := `{	
-			"timestamp": "2016-05-31T16:00:00.000Z",
-			"count": 7,
-			"uniques": 6
-      }`
+	want := `{
+		"timestamp":"2016-05-31T16:00:00Z",
+		"count":7,
+		"uniques":6
+	}`
 
 	testJSONMarshal(t, u, want)
 }
 
-func TestTrafficBreakdownOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &TrafficBreakdownOptions{}, "{}")
+func TestTrafficBreakdownOptions_addOptions(t *testing.T) {
+	url := "some/path"
+
+	testAddURLOptions(t, url, &UserListOptions{}, url)
 
 	u := &TrafficBreakdownOptions{
 		Per: "day",
 	}
 
-	want := `{
-		"per": "day"
-	}`
-
-	testJSONMarshal(t, u, want)
+	testAddURLOptions(t, url, u, url+`?per=day`)
 }

@@ -544,27 +544,32 @@ func TestRunnerGroup_Marshal(t *testing.T) {
 		Inherited:                Bool(true),
 		AllowsPublicRepositories: Bool(true),
 		RestrictedToWorkflows:    Bool(false),
-		SelectedWorkflows:        []string{},
+		SelectedWorkflows:        []string{"1"},
 	}
 
 	want := `{
-		"id": 1,
-		"name": "n",
-		"visibility": "v",
-		"default": true,
-		"selected_repositories_url": "s",
-		"runners_url": "r",
-		"inherited": true,
-		"allows_public_repositories": true,
-		"restricted_to_workflows": false,
-		"selected_workflows": []
+		"id":1,
+		"name":"n",
+		"visibility":"v",
+		"default":true,
+		"selected_repositories_url":"s",
+		"runners_url":"r",
+		"inherited":true,
+		"allows_public_repositories":true,
+		"restricted_to_workflows":false,
+		"selected_workflows":[
+			"1"
+		]
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestRunnerGroups_Marshal(t *testing.T) {
-	testJSONMarshal(t, &RunnerGroups{}, "{}")
+	testJSONMarshal(t, &RunnerGroups{}, `{
+		"total_count":0,
+		"runner_groups":null
+	}`)
 
 	u := &RunnerGroups{
 		TotalCount: int(1),
@@ -579,25 +584,29 @@ func TestRunnerGroups_Marshal(t *testing.T) {
 				Inherited:                Bool(true),
 				AllowsPublicRepositories: Bool(true),
 				RestrictedToWorkflows:    Bool(false),
-				SelectedWorkflows:        []string{},
+				SelectedWorkflows:        []string{"1"},
 			},
 		},
 	}
 
 	want := `{
-		"total_count": 1,
-		"runner_groups": [{
-			"id": 1,
-			"name": "n",
-			"visibility": "v",
-			"default": true,
-			"selected_repositories_url": "s",
-			"runners_url": "r",
-			"inherited": true,
-			"allows_public_repositories": true,
-			"restricted_to_workflows": false,
-			"selected_workflows": []
-		}]		
+		"total_count":1,
+		"runner_groups":[
+			{
+				"id":1,
+				"name":"n",
+				"visibility":"v",
+				"default":true,
+				"selected_repositories_url":"s",
+				"runners_url":"r",
+				"inherited":true,
+				"allows_public_repositories":true,
+				"restricted_to_workflows":false,
+				"selected_workflows":[
+					"1"
+				]
+			}
+		]
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -617,13 +626,20 @@ func TestCreateRunnerGroupRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"name": "n",
-		"visibility": "v",
-		"selected_repository_ids": [1],
-		"runners": [1],
-		"allows_public_repositories": true,
-		"restricted_to_workflows": true,
-		"selected_workflows": ["a","b"]
+		"name":"n",
+		"visibility":"v",
+		"selected_repository_ids":[
+			1
+		],
+		"runners":[
+			1
+		],
+		"allows_public_repositories":true,
+		"restricted_to_workflows":true,
+		"selected_workflows":[
+			"a",
+			"b"
+		]
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -641,40 +657,48 @@ func TestUpdateRunnerGroupRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"name": "n",
-		"visibility": "v",
-		"allows_public_repositories": true,
-		"restricted_to_workflows": false,
-		"selected_workflows": []
+		"name":"n",
+		"visibility":"v",
+		"allows_public_repositories":true,
+		"restricted_to_workflows":false
+	}`
+
+	testJSONMarshal(t, u, want)
+
+	u.SelectedWorkflows = []string{"1"}
+	want = `{
+		"name":"n",
+		"visibility":"v",
+		"allows_public_repositories":true,
+		"restricted_to_workflows":false,
+		"selected_workflows":[
+			"1"
+		]
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestSetRepoAccessRunnerGroupRequest_Marshal(t *testing.T) {
-	testJSONMarshal(t, &SetRepoAccessRunnerGroupRequest{}, "{}")
+	testJSONMarshal(t, &SetRepoAccessRunnerGroupRequest{}, `{"selected_repository_ids":null}`)
 
 	u := &SetRepoAccessRunnerGroupRequest{
 		SelectedRepositoryIDs: []int64{1},
 	}
 
-	want := `{
-		"selected_repository_ids": [1]
-	}`
+	want := `{"selected_repository_ids":[1]}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestSetRunnerGroupRunnersRequest_Marshal(t *testing.T) {
-	testJSONMarshal(t, &SetRunnerGroupRunnersRequest{}, "{}")
+	testJSONMarshal(t, &SetRunnerGroupRunnersRequest{}, `{"runners":null}`)
 
 	u := &SetRunnerGroupRunnersRequest{
 		Runners: []int64{1},
 	}
 
-	want := `{
-		"runners": [1]
-	}`
+	want := `{"runners":[1]}`
 
 	testJSONMarshal(t, u, want)
 }

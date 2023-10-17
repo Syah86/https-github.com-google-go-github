@@ -506,8 +506,8 @@ func TestPagesSource_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"branch": "branch",
-		"path": "path"
+		"branch":"branch",
+		"path":"path"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -520,15 +520,13 @@ func TestPagesError_Marshal(t *testing.T) {
 		Message: String("message"),
 	}
 
-	want := `{
-		"message": "message"
-	}`
+	want := `{"message":"message"}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestPagesUpdate_Marshal(t *testing.T) {
-	testJSONMarshal(t, &PagesUpdate{}, "{}")
+	testJSONMarshal(t, &PagesUpdate{}, `{"cname":null}`)
 
 	u := &PagesUpdate{
 		CNAME:  String("cname"),
@@ -536,8 +534,10 @@ func TestPagesUpdate_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"cname": "cname",
-		"source": { "path": "src" }
+		"cname":"cname",
+		"source":{
+			"path":"src"
+		}
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -559,14 +559,14 @@ func TestPages_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"url": "url",
-		"status": "status",
-		"cname": "cname",
-		"custom_404": false,
-		"html_url": "hurl",
-		"source": {
-			"branch": "branch",
-			"path": "path"
+		"url":"url",
+		"status":"status",
+		"cname":"cname",
+		"custom_404":false,
+		"html_url":"hurl",
+		"source":{
+			"branch":"branch",
+			"path":"path"
 		}
 	}`
 
@@ -590,18 +590,18 @@ func TestPagesBuild_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"url": "url",
-		"status": "status",
-		"error": {
-			"message": "message"
+		"url":"url",
+		"status":"status",
+		"error":{
+			"message":"message"
 		},
-		"pusher": {
-			"id": 1
+		"pusher":{
+			"id":1
 		},
-		"commit": "commit",
-		"duration": 1,
-		"created_at": ` + referenceTimeStr + `,
-		"updated_at": ` + referenceTimeStr + `
+		"commit":"commit",
+		"duration":1,
+		"created_at":` + referenceTimeStr + `,
+		"updated_at":` + referenceTimeStr + `
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -650,43 +650,43 @@ func TestPagesHealthCheckResponse_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"domain": {
-		  "host": "example.com",
-		  "uri": "http://example.com/",
-		  "nameservers": "default",
-		  "dns_resolves": true,
-		  "is_proxied": false,
-		  "is_cloudflare_ip": false,
-		  "is_fastly_ip": false,
-		  "is_old_ip_address": false,
-		  "is_a_record": true,
-		  "has_cname_record": false,
-		  "has_mx_records_present": false,
-		  "is_valid_domain": true,
-		  "is_apex_domain": true,
-		  "should_be_a_record": true,
-		  "is_cname_to_github_user_domain": false,
-		  "is_cname_to_pages_dot_github_dot_com": false,
-		  "is_cname_to_fastly": false,
-		  "is_pointed_to_github_pages_ip": true,
-		  "is_non_github_pages_ip_present": false,
-		  "is_pages_domain": false,
-		  "is_served_by_pages": true,
-		  "is_valid": true,
-		  "reason": "some reason",
-		  "responds_to_https": true,
-		  "enforces_https": true,
-		  "https_error": "some error",
-		  "is_https_eligible": true,
-		  "caa_error": "some error"
+		"domain":{
+			"host":"example.com",
+			"uri":"http://example.com/",
+			"nameservers":"default",
+			"dns_resolves":true,
+			"is_proxied":false,
+			"is_cloudflare_ip":false,
+			"is_fastly_ip":false,
+			"is_old_ip_address":false,
+			"is_a_record":true,
+			"has_cname_record":false,
+			"has_mx_records_present":false,
+			"is_valid_domain":true,
+			"is_apex_domain":true,
+			"should_be_a_record":true,
+			"is_cname_to_github_user_domain":false,
+			"is_cname_to_pages_dot_github_dot_com":false,
+			"is_cname_to_fastly":false,
+			"is_pointed_to_github_pages_ip":true,
+			"is_non_github_pages_ip_present":false,
+			"is_pages_domain":false,
+			"is_served_by_pages":true,
+			"is_valid":true,
+			"reason":"some reason",
+			"responds_to_https":true,
+			"enforces_https":true,
+			"https_error":"some error",
+			"is_https_eligible":true,
+			"caa_error":"some error"
 		},
-		"alt_domain": {
-		  "host": "www.example.com",
-		  "uri": "http://www.example.com/",
-		  "nameservers": "default",
-		  "dns_resolves": true
+		"alt_domain":{
+			"host":"www.example.com",
+			"uri":"http://www.example.com/",
+			"nameservers":"default",
+			"dns_resolves":true
 		}
-	  }`
+	}`
 
 	testJSONMarshal(t, u, want)
 }
@@ -702,9 +702,9 @@ func TestCreatePagesRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"source": {
-			"branch": "branch",
-			"path": "path"
+		"source":{
+			"branch":"branch",
+			"path":"path"
 		}
 	}`
 

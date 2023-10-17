@@ -127,28 +127,28 @@ func TestTag_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"tag": "tag",
-		"sha": "sha",
-		"url": "url",
-		"message": "msg",
-		"tagger": {
-			"date": ` + referenceTimeStr + `,
-			"name": "name",
-			"email": "email",
-			"username": "login"
+		"tag":"tag",
+		"sha":"sha",
+		"url":"url",
+		"message":"msg",
+		"tagger":{
+			"date":` + referenceTimeStr + `,
+			"name":"name",
+			"email":"email",
+			"username":"login"
 		},
-		"object": {
-			"type": "type",
-			"sha": "sha",
-			"url": "url"
+		"object":{
+			"type":"type",
+			"sha":"sha",
+			"url":"url"
 		},
-		"verification": {
-			"verified": true,
-			"reason": "reason",
-			"signature": "sign",
-			"payload": "payload"
+		"verification":{
+			"verified":true,
+			"reason":"reason",
+			"signature":"sign",
+			"payload":"payload"
 		},
-		"node_id": "nid"
+		"node_id":"nid"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -171,15 +171,15 @@ func TestCreateTagRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"tag": "tag",
-		"message": "msg",
-		"object": "obj",
-		"type": "type",
-		"tagger": {
-			"date": ` + referenceTimeStr + `,
-			"name": "name",
-			"email": "email",
-			"username": "login"
+		"tag":"tag",
+		"message":"msg",
+		"object":"obj",
+		"type":"type",
+		"tagger":{
+			"date":` + referenceTimeStr + `,
+			"name":"name",
+			"email":"email",
+			"username":"login"
 		}
 	}`
 

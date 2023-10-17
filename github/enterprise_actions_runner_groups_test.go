@@ -548,23 +548,22 @@ func TestEnterpriseRunnerGroup_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"name": "n",
-		"visibility": "v",
-		"default": true,
-		"selected_organizations_url": "s",
-		"runners_url": "r",
-		"inherited": true,
-		"allows_public_repositories": true,
-		"restricted_to_workflows": false,
-		"selected_workflows": []
+		"id":1,
+		"name":"n",
+		"visibility":"v",
+		"default":true,
+		"selected_organizations_url":"s",
+		"runners_url":"r",
+		"inherited":true,
+		"allows_public_repositories":true,
+		"restricted_to_workflows":false
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestEnterpriseRunnerGroups_Marshal(t *testing.T) {
-	testJSONMarshal(t, &EnterpriseRunnerGroups{}, "{}")
+	testJSONMarshal(t, &EnterpriseRunnerGroups{}, `{"runner_groups":null}`)
 
 	u := &EnterpriseRunnerGroups{
 		TotalCount: Int(1),
@@ -585,18 +584,17 @@ func TestEnterpriseRunnerGroups_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"total_count": 1,
-		"runner_groups": [{
-			"id": 1,
-			"name": "n",
-			"visibility": "v",
-			"default": true,
-			"selected_organizations_url": "s",
-			"runners_url": "r",
-			"inherited": true,
-			"allows_public_repositories": true,
-			"restricted_to_workflows": false,
-			"selected_workflows": []
+		"total_count":1,
+		"runner_groups":[{
+			"id":1,
+			"name":"n",
+			"visibility":"v",
+			"default":true,
+			"selected_organizations_url":"s",
+			"runners_url":"r",
+			"inherited":true,
+			"allows_public_repositories":true,
+			"restricted_to_workflows":false
 		}]		
 	}`
 
@@ -617,13 +615,13 @@ func TestCreateEnterpriseRunnerGroupRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"name": "n",
-		"visibility": "v",
-		"selected_organization_ids": [1],
-		"runners": [1],
-		"allows_public_repositories": true,
-		"restricted_to_workflows": true,
-		"selected_workflows": ["a","b"]
+		"name":"n",
+		"visibility":"v",
+		"selected_organization_ids":[1],
+		"runners":[1],
+		"allows_public_repositories":true,
+		"restricted_to_workflows":true,
+		"selected_workflows":["a","b"]
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -641,25 +639,24 @@ func TestUpdateEnterpriseRunnerGroupRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"name": "n",
-		"visibility": "v",
-		"allows_public_repositories": true,
-		"restricted_to_workflows": false,
-		"selected_workflows": []
+		"name":"n",
+		"visibility":"v",
+		"allows_public_repositories":true,
+		"restricted_to_workflows":false
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestSetOrgAccessRunnerGroupRequest_Marshal(t *testing.T) {
-	testJSONMarshal(t, &SetOrgAccessRunnerGroupRequest{}, "{}")
+	testJSONMarshal(t, &SetOrgAccessRunnerGroupRequest{}, `{"selected_organization_ids":null}`)
 
 	u := &SetOrgAccessRunnerGroupRequest{
 		SelectedOrganizationIDs: []int64{1},
 	}
 
 	want := `{
-		"selected_organization_ids": [1]
+		"selected_organization_ids":[1]
 	}`
 
 	testJSONMarshal(t, u, want)

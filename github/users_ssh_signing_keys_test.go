@@ -192,10 +192,10 @@ func TestSSHSigningKey_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"key": "abc",
-		"title": "title",
-		"created_at": ` + referenceTimeStr + `
+		"id":1,
+		"key":"abc",
+		"title":"title",
+		"created_at":` + referenceTimeStr + `
 	}`
 
 	testJSONMarshal(t, u, want)

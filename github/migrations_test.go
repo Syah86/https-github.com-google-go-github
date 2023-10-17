@@ -268,17 +268,17 @@ func TestMigration_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"guid": "guid",
-		"state": "state",
-		"lock_repositories": false,
-		"exclude_attachments": false,
-		"url": "url",
-		"created_at": "ca",
-		"updated_at": "ua",
-		"repositories": [
+		"id":1,
+		"guid":"guid",
+		"state":"state",
+		"lock_repositories":false,
+		"exclude_attachments":false,
+		"url":"url",
+		"created_at":"ca",
+		"updated_at":"ua",
+		"repositories":[
 			{
-				"id": 1
+				"id":1
 			}
 		]
 	}`
@@ -296,11 +296,11 @@ func TestStartMigration_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"repositories": [
+		"repositories":[
 			"r"
 		],
-		"lock_repositories": false,
-		"exclude_attachments": false
+		"lock_repositories":false,
+		"exclude_attachments":false
 	}`
 
 	testJSONMarshal(t, u, want)

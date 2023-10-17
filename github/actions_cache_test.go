@@ -530,20 +530,20 @@ func TestActionsCache_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"ref": "refAction",
-		"key": "key1",
-		"version": "alpha",
-		"last_accessed_at": ` + referenceTimeStr + `,
-		"created_at": ` + referenceTimeStr + `,
-		"size_in_bytes": 1
+		"id":1,
+		"ref":"refAction",
+		"key":"key1",
+		"version":"alpha",
+		"last_accessed_at":` + referenceTimeStr + `,
+		"created_at":` + referenceTimeStr + `,
+		"size_in_bytes":1
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestActionsCacheList_Marshal(t *testing.T) {
-	testJSONMarshal(t, &ActionsCacheList{}, "{}")
+	testJSONMarshal(t, &ActionsCacheList{}, `{"total_count":0}`)
 
 	u := &ActionsCacheList{
 		TotalCount: 2,
@@ -566,28 +566,33 @@ func TestActionsCacheList_Marshal(t *testing.T) {
 		},
 	}
 	want := `{
-		"total_count": 2,
-		"actions_caches": [{
-				"id": 1,
-				"key": "key1",
-				"version": "alpha",
-				"last_accessed_at": ` + referenceTimeStr + `,
-				"created_at": ` + referenceTimeStr + `,
-				"size_in_bytes": 1
+		"total_count":2,
+		"actions_caches":[{
+				"id":1,
+				"key":"key1",
+				"version":"alpha",
+				"last_accessed_at":` + referenceTimeStr + `,
+				"created_at":` + referenceTimeStr + `,
+				"size_in_bytes":1
 			},
 			{
-				"id": 2,
-				"ref": "refAction",
-				"last_accessed_at": ` + referenceTimeStr + `,
-				"created_at": ` + referenceTimeStr + `,
-				"size_in_bytes": 1
+				"id":2,
+				"ref":"refAction",
+				"last_accessed_at":` + referenceTimeStr + `,
+				"created_at":` + referenceTimeStr + `,
+				"size_in_bytes":1
 		}]
 	}`
 	testJSONMarshal(t, u, want)
 }
 
 func TestActionsCacheUsage_Marshal(t *testing.T) {
-	testJSONMarshal(t, &ActionsCacheUsage{}, "{}")
+	want := `{
+		"full_name":"",
+		"active_caches_size_in_bytes":0,
+		"active_caches_count":0
+	}`
+	testJSONMarshal(t, &ActionsCacheUsage{}, want)
 
 	u := &ActionsCacheUsage{
 		FullName:                "cache_usage1",
@@ -595,17 +600,17 @@ func TestActionsCacheUsage_Marshal(t *testing.T) {
 		ActiveCachesCount:       2,
 	}
 
-	want := `{
-		"full_name": "cache_usage1",
-		"active_caches_size_in_bytes": 2,
-		"active_caches_count": 2
+	want = `{
+		"full_name":"cache_usage1",
+		"active_caches_size_in_bytes":2,
+		"active_caches_count":2
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestActionsCacheUsageList_Marshal(t *testing.T) {
-	testJSONMarshal(t, &ActionsCacheUsageList{}, "{}")
+	testJSONMarshal(t, &ActionsCacheUsageList{}, `{"total_count":0}`)
 
 	u := &ActionsCacheUsageList{
 		TotalCount: 1,
@@ -619,11 +624,11 @@ func TestActionsCacheUsageList_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"total_count": 1,
-		"repository_cache_usages": [{
-			"full_name": "cache_usage1",
-			"active_caches_size_in_bytes": 2,
-			"active_caches_count": 2
+		"total_count":1,
+		"repository_cache_usages":[{
+			"full_name":"cache_usage1",
+			"active_caches_size_in_bytes":2,
+			"active_caches_count":2
 		}]
 	}`
 
@@ -631,16 +636,20 @@ func TestActionsCacheUsageList_Marshal(t *testing.T) {
 }
 
 func TestTotalCacheUsage_Marshal(t *testing.T) {
-	testJSONMarshal(t, &TotalCacheUsage{}, "{}")
+	want := `{
+		"total_active_caches_size_in_bytes":0,
+		"total_active_caches_count":0
+	}`
+	testJSONMarshal(t, &TotalCacheUsage{}, want)
 
 	u := &TotalCacheUsage{
 		TotalActiveCachesUsageSizeInBytes: 2,
 		TotalActiveCachesCount:            2,
 	}
 
-	want := `{
-		"total_active_caches_size_in_bytes": 2,
-		"total_active_caches_count": 2
+	want = `{
+		"total_active_caches_size_in_bytes":2,
+		"total_active_caches_count":2
 	}`
 
 	testJSONMarshal(t, u, want)

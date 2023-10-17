@@ -132,10 +132,10 @@ func TestUserEmail_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"email": "qwe@qwe.qwe",
-		"primary": false,
-		"verified": true,
-		"visibility": "yes"
+		"email":"qwe@qwe.qwe",
+		"primary":false,
+		"verified":true,
+		"visibility":"yes"
 	}`
 
 	testJSONMarshal(t, u, want)

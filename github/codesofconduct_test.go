@@ -107,10 +107,10 @@ func TestCodeOfConduct_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"name": "name",
-		"key": "key",
-		"url": "url",
-		"body": "body"
+		"name":"name",
+		"key":"key",
+		"url":"url",
+		"body":"body"
 	}`
 
 	testJSONMarshal(t, a, want)

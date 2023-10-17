@@ -732,92 +732,92 @@ func Test_CheckRunMarshal(t *testing.T) {
 			},
 		},
 	}
-	w := fmt.Sprintf(`{
-		"id": 1,
-		"node_id": "n",
-		"head_sha": "h",
-		"external_id": "1",
-		"url": "u",
-		"html_url": "u",
-		"details_url": "u",
-		"status": "s",
-		"conclusion": "c",
-		"started_at": "%s",
-		"completed_at": "%s",
-		"output": {
-			"title": "t",
-			"summary": "s",
-			"text": "t",
-			"annotations_count": 1,
-			"annotations_url": "a",
-			"annotations": [
+	w := `{
+		"id":1,
+		"node_id":"n",
+		"head_sha":"h",
+		"external_id":"1",
+		"url":"u",
+		"html_url":"u",
+		"details_url":"u",
+		"status":"s",
+		"conclusion":"c",
+		"started_at":"` + ts + `",
+		"completed_at":"` + ts + `",
+		"output":{
+			"title":"t",
+			"summary":"s",
+			"text":"t",
+			"annotations_count":1,
+			"annotations_url":"a",
+			"annotations":[
 				{
-					"path": "p",
-					"start_line": 1,
-					"end_line": 1,
-					"annotation_level": "a",
-					"message": "m",
-					"title": "t",
-					"raw_details": "r"
+					"path":"p",
+					"start_line":1,
+					"end_line":1,
+					"annotation_level":"a",
+					"message":"m",
+					"title":"t",
+					"raw_details":"r"
 				}
 			],
-			"images": [
+			"images":[
 				{
-					"alt": "a",
-					"image_url": "i",
-					"caption": "c"
+					"alt":"a",
+					"image_url":"i",
+					"caption":"c"
 				}
 			]
 		},
-		"name": "n",
-		"check_suite": {
-			"id": 1
+		"name":"n",
+		"check_suite":{
+			"id":1
 		},
-		"app": {
-			"id": 1,
-			"node_id": "n",
-			"owner": {
-				"login": "l",
-				"id": 1,
-				"node_id": "n",
-				"avatar_url": "a",
-				"url": "u",
-				"events_url": "e",
-				"repos_url": "r"
+		"app":{
+			"id":1,
+			"node_id":"n",
+			"owner":{
+				"login":"l",
+				"id":1,
+				"node_id":"n",
+				"avatar_url":"a",
+				"url":"u",
+				"events_url":"e",
+				"repos_url":"r"
 			},
-			"name": "n",
-			"description": "d",
-			"external_url": "u",
-			"html_url": "h",
-			"created_at": "%s",
-			"updated_at": "%s"
+			"name":"n",
+			"description":"d",
+			"external_url":"u",
+			"html_url":"h",
+			"created_at":"` + ts + `",
+			"updated_at":"` + ts + `"
 		},
-		"pull_requests": [
+		"pull_requests":[
 			{
-				"id": 1,
-				"number": 1,
-				"url": "u",
-				"head": {
-					"ref": "r",
-					"sha": "s",
-					"repo": {
-						"id": 1,
-						"name": "n",
-						"url": "s"
+				"id":1,
+				"number":1,
+				"url":"u",
+				"head":{
+					"ref":"r",
+					"sha":"s",
+					"repo":{
+						"id":1,
+						"name":"n",
+						"url":"s"
 					}
 				},
-				"base": {
-					"ref": "r",
-					"sha": "s",
-					"repo": {
-						"id": 1,
-						"name": "n",
-						"url": "u"
+				"base":{
+					"ref":"r",
+					"sha":"s",
+					"repo":{
+						"id":1,
+						"name":"n",
+						"url":"u"
 					}
 				}
 			}
 		]
-	  }`, ts, ts, ts, ts)
+	}`
 
 	testJSONMarshal(t, &c, w)
 }
@@ -890,67 +890,67 @@ func Test_CheckSuiteMarshal(t *testing.T) {
 		},
 	}
 
-	w := fmt.Sprintf(`{
-			"id": 1,
-			"node_id": "n",
-			"head_branch": "h",
-			"head_sha": "h",
-			"url": "u",
-			"before": "b",
-			"after": "a",
-			"status": "s",
-			"conclusion": "c",
-			"app": {
-				"id": 1,
-				"node_id": "n",
-				"owner": {
-					"login": "l",
-					"id": 1,
-					"node_id": "n",
-					"avatar_url": "a",
-					"url": "u",
-					"events_url": "e",
-					"repos_url": "r"
-				},
-				"name": "n",
-				"description": "d",
-				"external_url": "u",
-				"html_url": "h",
-				"created_at": "%s",
-				"updated_at": "%s"
+	w := `{
+		"id":1,
+		"node_id":"n",
+		"head_branch":"h",
+		"head_sha":"h",
+		"url":"u",
+		"before":"b",
+		"after":"a",
+		"status":"s",
+		"conclusion":"c",
+		"app":{
+			"id":1,
+			"node_id":"n",
+			"owner":{
+				"login":"l",
+				"id":1,
+				"node_id":"n",
+				"avatar_url":"a",
+				"url":"u",
+				"events_url":"e",
+				"repos_url":"r"
 			},
-			"repository": {
-				"id": 1
-			},
-			"pull_requests": [
+			"name":"n",
+			"description":"d",
+			"external_url":"u",
+			"html_url":"h",
+			"created_at":"` + ts + `",
+			"updated_at":"` + ts + `"
+		},
+		"repository":{
+			"id":1
+		},
+		"pull_requests":[
 			{
-				"id": 1,
-				"number": 1,
-				"url": "u",
-				"head": {
-					"ref": "r",
-					"sha": "s",
-					"repo": {
-						"id": 1,
-						"name": "n",
-						"url": "s"
+				"id":1,
+				"number":1,
+				"url":"u",
+				"head":{
+					"ref":"r",
+					"sha":"s",
+					"repo":{
+						"id":1,
+						"name":"n",
+						"url":"s"
 					}
 				},
-				"base": {
-					"ref": "r",
-					"sha": "s",
-					"repo": {
-						"id": 1,
-						"name": "n",
-						"url": "u"
+				"base":{
+					"ref":"r",
+					"sha":"s",
+					"repo":{
+						"id":1,
+						"name":"n",
+						"url":"u"
 					}
 				}
 			}
 		],
-		"head_commit": {
-			"sha": "s"
+		"head_commit":{
+			"sha":"s"
 		}
-		}`, ts, ts)
+	}`
 
 	testJSONMarshal(t, &c, w)
 }
@@ -971,15 +971,15 @@ func TestCheckRunAnnotation_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"path": "p",
-		"start_line": 1,
-		"end_line": 1,
-		"start_column": 1,
-		"end_column": 1,
-		"annotation_level": "al",
-		"message": "m",
-		"title": "t",
-		"raw_details": "rd"
+		"path":"p",
+		"start_line":1,
+		"end_line":1,
+		"start_column":1,
+		"end_column":1,
+		"annotation_level":"al",
+		"message":"m",
+		"title":"t",
+		"raw_details":"rd"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -995,16 +995,20 @@ func TestCheckRunImage_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"alt": "a",
-		"image_url": "i",
-		"caption": "c"
+		"alt":"a",
+		"image_url":"i",
+		"caption":"c"
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestCheckRunAction_Marshal(t *testing.T) {
-	testJSONMarshal(t, &CheckRunAction{}, "{}")
+	testJSONMarshal(t, &CheckRunAction{}, `{
+		"label":"",
+		"description":"",
+		"identifier":""
+	}`)
 
 	u := &CheckRunAction{
 		Label:       "l",
@@ -1013,9 +1017,9 @@ func TestCheckRunAction_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"label": "l",
-		"description": "d",
-		"identifier": "i"
+		"label":"l",
+		"description":"d",
+		"identifier":"i"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -1030,15 +1034,15 @@ func TestAutoTriggerCheck_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"app_id": 1,
-		"setting": false
+		"app_id":1,
+		"setting":false
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestCreateCheckSuiteOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &CreateCheckSuiteOptions{}, "{}")
+	testJSONMarshal(t, &CreateCheckSuiteOptions{}, `{"head_sha":""}`)
 
 	u := &CreateCheckSuiteOptions{
 		HeadSHA:    "hsha",
@@ -1046,8 +1050,8 @@ func TestCreateCheckSuiteOptions_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"head_sha": "hsha",
-		"head_branch": "hb"
+		"head_sha":"hsha",
+		"head_branch":"hb"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -1085,29 +1089,29 @@ func TestCheckRunOutput_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"title": "ti",
-		"summary": "s",
-		"text": "t",
-		"annotations_count": 1,
-		"annotations_url": "au",
-		"annotations": [
+		"title":"ti",
+		"summary":"s",
+		"text":"t",
+		"annotations_count":1,
+		"annotations_url":"au",
+		"annotations":[
 			{
-				"path": "p",
-				"start_line": 1,
-				"end_line": 1,
-				"start_column": 1,
-				"end_column": 1,
-				"annotation_level": "al",
-				"message": "m",
-				"title": "t",
-				"raw_details": "rd"
+				"path":"p",
+				"start_line":1,
+				"end_line":1,
+				"start_column":1,
+				"end_column":1,
+				"annotation_level":"al",
+				"message":"m",
+				"title":"t",
+				"raw_details":"rd"
 			}
 		],
-		"images": [
+		"images":[
 			{
-				"alt": "a",
-				"image_url": "i",
-				"caption": "c"
+				"alt":"a",
+				"image_url":"i",
+				"caption":"c"
 			}
 		]
 	}`
@@ -1116,7 +1120,10 @@ func TestCheckRunOutput_Marshal(t *testing.T) {
 }
 
 func TestCreateCheckRunOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &CreateCheckRunOptions{}, "{}")
+	testJSONMarshal(t, &CreateCheckRunOptions{}, `{
+		"name":"",
+		"head_sha":""
+	}`)
 
 	u := &CreateCheckRunOptions{
 		Name:        "n",
@@ -1164,46 +1171,46 @@ func TestCreateCheckRunOptions_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"name": "n",
-		"head_sha": "hsha",
-		"details_url": "durl",
-		"external_id": "eid",
-		"status": "s",
-		"conclusion": "c",
-		"started_at": ` + referenceTimeStr + `,
-		"completed_at": ` + referenceTimeStr + `,
-		"output": {
-			"title": "ti",
-			"summary": "s",
-			"text": "t",
-			"annotations_count": 1,
-			"annotations_url": "au",
-			"annotations": [
+		"name":"n",
+		"head_sha":"hsha",
+		"details_url":"durl",
+		"external_id":"eid",
+		"status":"s",
+		"conclusion":"c",
+		"started_at":` + referenceTimeStr + `,
+		"completed_at":` + referenceTimeStr + `,
+		"output":{
+			"title":"ti",
+			"summary":"s",
+			"text":"t",
+			"annotations_count":1,
+			"annotations_url":"au",
+			"annotations":[
 				{
-					"path": "p",
-					"start_line": 1,
-					"end_line": 1,
-					"start_column": 1,
-					"end_column": 1,
-					"annotation_level": "al",
-					"message": "m",
-					"title": "t",
-					"raw_details": "rd"
+					"path":"p",
+					"start_line":1,
+					"end_line":1,
+					"start_column":1,
+					"end_column":1,
+					"annotation_level":"al",
+					"message":"m",
+					"title":"t",
+					"raw_details":"rd"
 				}
 			],
-			"images": [
+			"images":[
 				{
-					"alt": "a",
-					"image_url": "i",
-					"caption": "c"
+					"alt":"a",
+					"image_url":"i",
+					"caption":"c"
 				}
 			]
 		},
-		"actions": [
+		"actions":[
 			{
-				"label": "l",
-				"description": "d",
-				"identifier": "i"
+				"label":"l",
+				"description":"d",
+				"identifier":"i"
 			}
 		]
 	}`
@@ -1212,7 +1219,7 @@ func TestCreateCheckRunOptions_Marshal(t *testing.T) {
 }
 
 func TestUpdateCheckRunOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &UpdateCheckRunOptions{}, "{}")
+	testJSONMarshal(t, &UpdateCheckRunOptions{}, `{"name":""}`)
 
 	u := &UpdateCheckRunOptions{
 		Name:        "n",
@@ -1258,44 +1265,44 @@ func TestUpdateCheckRunOptions_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"name": "n",
-		"details_url": "durl",
-		"external_id": "eid",
-		"status": "s",
-		"conclusion": "c",
-		"completed_at": ` + referenceTimeStr + `,
-		"output": {
-			"title": "ti",
-			"summary": "s",
-			"text": "t",
-			"annotations_count": 1,
-			"annotations_url": "au",
-			"annotations": [
+		"name":"n",
+		"details_url":"durl",
+		"external_id":"eid",
+		"status":"s",
+		"conclusion":"c",
+		"completed_at":` + referenceTimeStr + `,
+		"output":{
+			"title":"ti",
+			"summary":"s",
+			"text":"t",
+			"annotations_count":1,
+			"annotations_url":"au",
+			"annotations":[
 				{
-					"path": "p",
-					"start_line": 1,
-					"end_line": 1,
-					"start_column": 1,
-					"end_column": 1,
-					"annotation_level": "al",
-					"message": "m",
-					"title": "t",
-					"raw_details": "rd"
+					"path":"p",
+					"start_line":1,
+					"end_line":1,
+					"start_column":1,
+					"end_column":1,
+					"annotation_level":"al",
+					"message":"m",
+					"title":"t",
+					"raw_details":"rd"
 				}
 			],
-			"images": [
+			"images":[
 				{
-					"alt": "a",
-					"image_url": "i",
-					"caption": "c"
+					"alt":"a",
+					"image_url":"i",
+					"caption":"c"
 				}
 			]
 		},
-		"actions": [
+		"actions":[
 			{
-				"label": "l",
-				"description": "d",
-				"identifier": "i"
+				"label":"l",
+				"description":"d",
+				"identifier":"i"
 			}
 		]
 	}`
@@ -1399,89 +1406,89 @@ func TestListCheckRunsResults_Marshal(t *testing.T) {
 	}
 
 	w := `{
-		"total_count": 1,
-		"check_runs": [
+		"total_count":1,
+		"check_runs":[
 			{
-				"id": 1,
-				"node_id": "n",
-				"head_sha": "h",
-				"external_id": "1",
-				"url": "u",
-				"html_url": "u",
-				"details_url": "u",
-				"status": "s",
-				"conclusion": "c",
-				"started_at": ` + referenceTimeStr + `,
-				"completed_at": ` + referenceTimeStr + `,
-				"output": {
-					"title": "t",
-					"summary": "s",
-					"text": "t",
-					"annotations_count": 1,
-					"annotations_url": "a",
-					"annotations": [
+				"id":1,
+				"node_id":"n",
+				"head_sha":"h",
+				"external_id":"1",
+				"url":"u",
+				"html_url":"u",
+				"details_url":"u",
+				"status":"s",
+				"conclusion":"c",
+				"started_at":` + referenceTimeStr + `,
+				"completed_at":` + referenceTimeStr + `,
+				"output":{
+					"title":"t",
+					"summary":"s",
+					"text":"t",
+					"annotations_count":1,
+					"annotations_url":"a",
+					"annotations":[
 						{
-							"path": "p",
-							"start_line": 1,
-							"end_line": 1,
-							"annotation_level": "a",
-							"message": "m",
-							"title": "t",
-							"raw_details": "r"
+							"path":"p",
+							"start_line":1,
+							"end_line":1,
+							"annotation_level":"a",
+							"message":"m",
+							"title":"t",
+							"raw_details":"r"
 						}
 					],
-					"images": [
+					"images":[
 						{
-							"alt": "a",
-							"image_url": "i",
-							"caption": "c"
+							"alt":"a",
+							"image_url":"i",
+							"caption":"c"
 						}
 					]
 				},
-				"name": "n",
-				"check_suite": {
-					"id": 1
+				"name":"n",
+				"check_suite":{
+					"id":1
 				},
-				"app": {
-					"id": 1,
-					"node_id": "n",
-					"owner": {
-						"login": "l",
-						"id": 1,
-						"node_id": "n",
-						"avatar_url": "a",
-						"url": "u",
-						"events_url": "e",
-						"repos_url": "r"
+				"app":{
+					"id":1,
+					"node_id":"n",
+					"owner":{
+						"login":"l",
+						"id":1,
+						"node_id":"n",
+						"avatar_url":"a",
+						"url":"u",
+						"events_url":"e",
+						"repos_url":"r"
 					},
-					"name": "n",
-					"description": "d",
-					"external_url": "u",
-					"html_url": "h",
-					"created_at": ` + referenceTimeStr + `,
-					"updated_at": ` + referenceTimeStr + `
+					"name":"n",
+					"description":"d",
+					"external_url":"u",
+					"html_url":"h",
+					"created_at":` + referenceTimeStr + `,
+					"updated_at":` + referenceTimeStr + `
 				},
-				"pull_requests": [
+				"pull_requests":[
 					{
-						"id": 1,
-						"number": 1,
-						"url": "u",
-						"head": {
-							"ref": "r",
-							"sha": "s",
-							"repo": {
-								"id": 1,
-								"name": "n",
-								"url": "s"
+						"id":1,
+						"number":1,
+						"url":"u",
+						"head":{
+							"ref":"r",
+							"sha":"s",
+							"repo":{
+								"id":1,
+								"name":"n",
+								"url":"s"
 							}
 						},
-						"base": {
-							"ref": "r",
-							"sha": "s",
-							"repo": {
-								"id": 1,
-								"name": "n",
-								"url": "u"
+						"base":{
+							"ref":"r",
+							"sha":"s",
+							"repo":{
+								"id":1,
+								"name":"n",
+								"url":"u"
 							}
 						}
 					}
@@ -1490,7 +1497,7 @@ func TestListCheckRunsResults_Marshal(t *testing.T) {
 		]
 	}`
 
-	testJSONMarshal(t, &l, w)
+	testJSONMarshal(t, l, w)
 }
 
 func TestListCheckSuiteResults_Marshal(t *testing.T) {
@@ -1564,73 +1571,73 @@ func TestListCheckSuiteResults_Marshal(t *testing.T) {
 	}
 
 	w := `{
-		"total_count": 1,
-		"check_suites": [
+		"total_count":1,
+		"check_suites":[
 			{
-				"id": 1,
-				"node_id": "n",
-				"head_branch": "h",
-				"head_sha": "h",
-				"url": "u",
-				"before": "b",
-				"after": "a",
-				"status": "s",
-				"conclusion": "c",
-				"app": {
-					"id": 1,
-					"node_id": "n",
-					"owner": {
-						"login": "l",
-						"id": 1,
-						"node_id": "n",
-						"avatar_url": "a",
-						"url": "u",
-						"events_url": "e",
-						"repos_url": "r"
+				"id":1,
+				"node_id":"n",
+				"head_branch":"h",
+				"head_sha":"h",
+				"url":"u",
+				"before":"b",
+				"after":"a",
+				"status":"s",
+				"conclusion":"c",
+				"app":{
+					"id":1,
+					"node_id":"n",
+					"owner":{
+						"login":"l",
+						"id":1,
+						"node_id":"n",
+						"avatar_url":"a",
+						"url":"u",
+						"events_url":"e",
+						"repos_url":"r"
 					},
-					"name": "n",
-					"description": "d",
-					"external_url": "u",
-					"html_url": "h",
-					"created_at": ` + referenceTimeStr + `,
-					"updated_at": ` + referenceTimeStr + `
+					"name":"n",
+					"description":"d",
+					"external_url":"u",
+					"html_url":"h",
+					"created_at":` + referenceTimeStr + `,
+					"updated_at":` + referenceTimeStr + `
 				},
-				"repository": {
-					"id": 1
+				"repository":{
+					"id":1
 				},
-				"pull_requests": [
-				{
-					"id": 1,
-					"number": 1,
-					"url": "u",
-					"head": {
-						"ref": "r",
-						"sha": "s",
-						"repo": {
-							"id": 1,
-							"name": "n",
-							"url": "s"
-						}
-					},
-					"base": {
-						"ref": "r",
-						"sha": "s",
-						"repo": {
-							"id": 1,
-							"name": "n",
-							"url": "u"
+				"pull_requests":[
+					{
+						"id":1,
+						"number":1,
+						"url":"u",
+						"head":{
+							"ref":"r",
+							"sha":"s",
+							"repo":{
+								"id":1,
+								"name":"n",
+								"url":"s"
+							}
+						},
+						"base":{
+							"ref":"r",
+							"sha":"s",
+							"repo":{
+								"id":1,
+								"name":"n",
+								"url":"u"
+							}
 						}
 					}
+				],
+				"head_commit":{
+					"sha":"s"
 				}
-			],
-			"head_commit": {
-				"sha": "s"
-			}
 			}
 		]
 	}`
 
-	testJSONMarshal(t, &l, w)
+	testJSONMarshal(t, l, w)
 }
 
 func TestCheckSuitePreferenceOptions_Marshal(t *testing.T) {
@@ -1646,10 +1653,10 @@ func TestCheckSuitePreferenceOptions_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"auto_trigger_checks": [
+		"auto_trigger_checks":[
 			{
-				"app_id": 1,
-				"setting": false
+				"app_id":1,
+				"setting":false
 			}
 		]
 	}`
@@ -1670,10 +1677,10 @@ func TestPreferenceList_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"auto_trigger_checks": [
+		"auto_trigger_checks":[
 			{
-				"app_id": 1,
-				"setting": false
+				"app_id":1,
+				"setting":false
 			}
 		]
 	}`
@@ -1701,15 +1708,15 @@ func TestCheckSuitePreferenceResults_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"preferences": {
-			"auto_trigger_checks": [
+		"preferences":{
+			"auto_trigger_checks":[
 				{
-					"app_id": 1,
-					"setting": false
+					"app_id":1,
+					"setting":false
 				}
 			]
 		},
-		"repository": {
+		"repository":{
 			"id":1,
 			"name":"n",
 			"url":"u"

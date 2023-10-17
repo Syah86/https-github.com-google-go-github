@@ -57,7 +57,7 @@ func TestOrganizationsService_ReviewPersonalAccessTokenRequest(t *testing.T) {
 }
 
 func TestReviewPersonalAccessTokenRequestOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &ReviewPersonalAccessTokenRequestOptions{}, "{}")
+	testJSONMarshal(t, &ReviewPersonalAccessTokenRequestOptions{}, `{"action":""}`)
 
 	u := &ReviewPersonalAccessTokenRequestOptions{
 		Action: "a",
@@ -65,8 +65,8 @@ func TestReviewPersonalAccessTokenRequestOptions_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"action": "a",
-		"reason": "r"
+		"action":"a",
+		"reason":"r"
 	}`
 
 	testJSONMarshal(t, u, want)

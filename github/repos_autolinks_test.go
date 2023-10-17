@@ -174,9 +174,9 @@ func TestAutolinkOptions_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"key_prefix": "kp",
-		"url_template": "URLT",
-		"is_alphanumeric": true
+		"key_prefix":"kp",
+		"url_template":"URLT",
+		"is_alphanumeric":true
 	}`
 
 	testJSONMarshal(t, r, want)
@@ -193,10 +193,10 @@ func TestAutolink_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"key_prefix": "kp",
-		"url_template": "URLT",
-		"is_alphanumeric": true
+		"id":1,
+		"key_prefix":"kp",
+		"url_template":"URLT",
+		"is_alphanumeric":true
 	}`
 
 	testJSONMarshal(t, r, want)

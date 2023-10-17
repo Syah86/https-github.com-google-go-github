@@ -139,8 +139,8 @@ func TestRename_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"from": "from",
-		"to": "to"
+		"from":"from",
+		"to":"to"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -157,10 +157,10 @@ func TestDismissedReview_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"state": "state",
-		"review_id": 1,
-		"dismissal_message": "dm",
-		"dismissal_commit_id": "dcid"
+		"state":"state",
+		"review_id":1,
+		"dismissal_message":"dm",
+		"dismissal_commit_id":"dcid"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -349,189 +349,189 @@ func TestIssueEvent_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"url": "url",
-		"actor": {
-			"login": "l",
-			"id": 1,
-			"avatar_url": "a",
-			"gravatar_id": "g",
-			"name": "n",
-			"company": "c",
-			"blog": "b",
-			"location": "l",
-			"email": "e",
-			"hireable": true,
-			"bio": "b",
-			"twitter_username": "t",
-			"public_repos": 1,
-			"followers": 1,
-			"following": 1,
-			"created_at": ` + referenceTimeStr + `,
-			"suspended_at": ` + referenceTimeStr + `,
-			"url": "u"
+		"id":1,
+		"url":"url",
+		"actor":{
+			"login":"l",
+			"id":1,
+			"avatar_url":"a",
+			"gravatar_id":"g",
+			"name":"n",
+			"company":"c",
+			"blog":"b",
+			"location":"l",
+			"email":"e",
+			"hireable":true,
+			"bio":"b",
+			"twitter_username":"t",
+			"public_repos":1,
+			"followers":1,
+			"following":1,
+			"created_at":` + referenceTimeStr + `,
+			"suspended_at":` + referenceTimeStr + `,
+			"url":"u"
 		},
-		"event": "event",
-		"created_at": ` + referenceTimeStr + `,
-		"issue": {
-			"id": 1
+		"event":"event",
+		"created_at":` + referenceTimeStr + `,
+		"issue":{
+			"id":1
 		},
-		"assignee": {
-			"login": "l",
-			"id": 1,
-			"avatar_url": "a",
-			"gravatar_id": "g",
-			"name": "n",
-			"company": "c",
-			"blog": "b",
-			"location": "l",
-			"email": "e",
-			"hireable": true,
-			"bio": "b",
-			"twitter_username": "t",
-			"public_repos": 1,
-			"followers": 1,
-			"following": 1,
-			"created_at": ` + referenceTimeStr + `,
-			"suspended_at": ` + referenceTimeStr + `,
-			"url": "u"
+		"assignee":{
+			"login":"l",
+			"id":1,
+			"avatar_url":"a",
+			"gravatar_id":"g",
+			"name":"n",
+			"company":"c",
+			"blog":"b",
+			"location":"l",
+			"email":"e",
+			"hireable":true,
+			"bio":"b",
+			"twitter_username":"t",
+			"public_repos":1,
+			"followers":1,
+			"following":1,
+			"created_at":` + referenceTimeStr + `,
+			"suspended_at":` + referenceTimeStr + `,
+			"url":"u"
 		},
-		"assigner": {
-			"login": "l",
-			"id": 1,
-			"avatar_url": "a",
-			"gravatar_id": "g",
-			"name": "n",
-			"company": "c",
-			"blog": "b",
-			"location": "l",
-			"email": "e",
-			"hireable": true,
-			"bio": "b",
-			"twitter_username": "t",
-			"public_repos": 1,
-			"followers": 1,
-			"following": 1,
-			"created_at": ` + referenceTimeStr + `,
-			"suspended_at": ` + referenceTimeStr + `,
-			"url": "u"
+		"assigner":{
+			"login":"l",
+			"id":1,
+			"avatar_url":"a",
+			"gravatar_id":"g",
+			"name":"n",
+			"company":"c",
+			"blog":"b",
+			"location":"l",
+			"email":"e",
+			"hireable":true,
+			"bio":"b",
+			"twitter_username":"t",
+			"public_repos":1,
+			"followers":1,
+			"following":1,
+			"created_at":` + referenceTimeStr + `,
+			"suspended_at":` + referenceTimeStr + `,
+			"url":"u"
 		},
-		"commit_id": "cid",
-		"milestone": {
-			"id": 1
+		"commit_id":"cid",
+		"milestone":{
+			"id":1
 		},
-		"label": {
-			"id": 1
+		"label":{
+			"id":1
 		},
-		"rename": {
-			"from": "from",
-			"to": "to"
+		"rename":{
+			"from":"from",
+			"to":"to"
 		},
-		"lock_reason": "lr",
-		"project_card": {
-			"id": 1
+		"lock_reason":"lr",
+		"project_card":{
+			"id":1
 		},
-		"dismissed_review": {
-			"state": "state",
-			"review_id": 1,
-			"dismissal_message": "dm",
-			"dismissal_commit_id": "dcid"
+		"dismissed_review":{
+			"state":"state",
+			"review_id":1,
+			"dismissal_message":"dm",
+			"dismissal_commit_id":"dcid"
 		},
-		"requested_reviewer": {
-			"login": "l",
-			"id": 1,
-			"avatar_url": "a",
-			"gravatar_id": "g",
-			"name": "n",
-			"company": "c",
-			"blog": "b",
-			"location": "l",
-			"email": "e",
-			"hireable": true,
-			"bio": "b",
-			"twitter_username": "t",
-			"public_repos": 1,
-			"followers": 1,
-			"following": 1,
-			"created_at": ` + referenceTimeStr + `,
-			"suspended_at": ` + referenceTimeStr + `,
-			"url": "u"
+		"requested_reviewer":{
+			"login":"l",
+			"id":1,
+			"avatar_url":"a",
+			"gravatar_id":"g",
+			"name":"n",
+			"company":"c",
+			"blog":"b",
+			"location":"l",
+			"email":"e",
+			"hireable":true,
+			"bio":"b",
+			"twitter_username":"t",
+			"public_repos":1,
+			"followers":1,
+			"following":1,
+			"created_at":` + referenceTimeStr + `,
+			"suspended_at":` + referenceTimeStr + `,
+			"url":"u"
 		},
-		"requested_team": {
-			"id": 1,
-			"node_id": "n",
-			"name": "n",
-			"description": "d",
-			"url": "u",
-			"slug": "s",
-			"permission": "p",
-			"privacy": "p",
-			"members_count": 1,
-			"repos_count": 1,
-			"members_url": "m",
-			"repositories_url": "r",
-			"organization": {
-				"login": "l",
-				"id": 1,
-				"node_id": "n",
-				"avatar_url": "a",
-				"html_url": "h",
-				"name": "n",
-				"company": "c",
-				"blog": "b",
-				"location": "l",
-				"email": "e"
+		"requested_team":{
+			"id":1,
+			"node_id":"n",
+			"name":"n",
+			"description":"d",
+			"url":"u",
+			"slug":"s",
+			"permission":"p",
+			"privacy":"p",
+			"members_count":1,
+			"repos_count":1,
+			"organization":{
+				"login":"l",
+				"id":1,
+				"node_id":"n",
+				"avatar_url":"a",
+				"html_url":"h",
+				"name":"n",
+				"company":"c",
+				"blog":"b",
+				"location":"l",
+				"email":"e"
 			},
-			"parent": {
-				"id": 1,
-				"node_id": "n",
-				"name": "n",
-				"description": "d",
-				"url": "u",
-				"slug": "s",
-				"permission": "p",
-				"privacy": "p",
-				"members_count": 1,
-				"repos_count": 1
+			"members_url":"m",
+			"repositories_url":"r",
+			"parent":{
+				"id":1,
+				"node_id":"n",
+				"name":"n",
+				"description":"d",
+				"url":"u",
+				"slug":"s",
+				"permission":"p",
+				"privacy":"p",
+				"members_count":1,
+				"repos_count":1
 			},
-			"ldap_dn": "l"
+			"ldap_dn":"l"
 		},
-		"performed_via_github_app": {
-			"id": 1,
-			"node_id": "n",
-			"owner": {
-				"login": "l",
-				"id": 1,
-				"node_id": "n",
-				"url": "u",
-				"repos_url": "r",
-				"events_url": "e",
-				"avatar_url": "a"
+		"review_requester":{
+			"login":"l",
+			"id":1,
+			"avatar_url":"a",
+			"gravatar_id":"g",
+			"name":"n",
+			"company":"c",
+			"blog":"b",
+			"location":"l",
+			"email":"e",
+			"hireable":true,
+			"bio":"b",
+			"twitter_username":"t",
+			"public_repos":1,
+			"followers":1,
+			"following":1,
+			"created_at":` + referenceTimeStr + `,
+			"suspended_at":` + referenceTimeStr + `,
+			"url":"u"
+		},
+		"performed_via_github_app":{
+			"id":1,
+			"node_id":"n",
+			"owner":{
+				"login":"l",
+				"id":1,
+				"node_id":"n",
+				"avatar_url":"a",
+				"url":"u",
+				"events_url":"e",
+				"repos_url":"r"
 			},
-			"name": "n",
-			"description": "d",
-			"html_url": "h",
-			"external_url": "u"
-		},
-		"review_requester": {
-			"login": "l",
-			"id": 1,
-			"avatar_url": "a",
-			"gravatar_id": "g",
-			"name": "n",
-			"company": "c",
-			"blog": "b",
-			"location": "l",
-			"email": "e",
-			"hireable": true,
-			"bio": "b",
-			"twitter_username": "t",
-			"public_repos": 1,
-			"followers": 1,
-			"following": 1,
-			"created_at": ` + referenceTimeStr + `,
-			"suspended_at": ` + referenceTimeStr + `,
-			"url": "u"
+			"name":"n",
+			"description":"d",
+			"external_url":"u",
+			"html_url":"h"
 		}
 	}`
 

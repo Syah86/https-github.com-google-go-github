@@ -6,6 +6,7 @@
 package github
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
@@ -143,29 +144,63 @@ func testBody(t *testing.T, r *http.Request, want string) {
 	}
 }
 
-// Test whether the marshaling of v produces JSON that corresponds
-// to the want string.
+// Test whether structure v has the specified tag in all fields.
+func testStructTags(t *testing.T, v interface{}, tag string) {
+	t.Helper()
+
+	vt := reflect.Indirect(reflect.ValueOf(v)).Type()
+	for i := 0; i < vt.NumField(); i++ {
+		field := vt.Field(i)
+		if alias, ok := field.Tag.Lookup(tag); ok {
+			if alias == "" {
+				t.Errorf("The field %+v has a blank tag", field)
+			}
+		} else {
+			t.Errorf("The field %+v has no tag specified", field)
+		}
+	}
+}
+
+// Test whether the marshaling of v produces JSON that corresponds to the
+// want string.
+//
+// Since this is a strictly exact comparison, it is important that we follow
+// some rules when constructing the expected value:
+//
+//   - No extra spaces. JSON strings can be formatted using only line breaks and tabs
+//     (make sure they are tabs and not spaces).
+//
+//   - The JSON fields must be in the same order as they were defined in the
+//     structure, or in lexicographical order if it's a map.
+//
+//   - All fields must have the JSON tag.
 func testJSONMarshal(t *testing.T, v interface{}, want string) {
 	t.Helper()
-	// Unmarshal the wanted JSON, to verify its correctness, and marshal it back
-	// to sort the keys.
-	u := reflect.New(reflect.TypeOf(v)).Interface()
-	if err := json.Unmarshal([]byte(want), &u); err != nil {
-		t.Errorf("Unable to unmarshal JSON for %v: %v", want, err)
-	}
-	w, err := json.MarshalIndent(u, "", "  ")
-	if err != nil {
-		t.Errorf("Unable to marshal JSON for %#v", u)
+
+	// As the comparison can be made using structures and maps, we need to
+	// determine the name of the type of v to know if it's a map or not.
+	interfaceName := fmt.Sprintf("%s", reflect.ValueOf(&v).Elem().Interface())
+
+	// If the type of v is a structure, check that all fields have the JSON tag.
+	if !strings.HasPrefix(interfaceName, "&map") {
+		testStructTags(t, v, "json")
 	}
 
-	// Marshal the target value.
-	got, err := json.MarshalIndent(v, "", "  ")
+	j, err := json.Marshal(v)
 	if err != nil {
-		t.Errorf("Unable to marshal JSON for %#v", v)
+		t.Errorf("Unable to unmarshal JSON for %v: %v", v, err)
 	}
 
-	if diff := cmp.Diff(string(w), string(got)); diff != "" {
-		t.Errorf("json.Marshal returned:\n%s\nwant:\n%s\ndiff:\n%v", got, w, diff)
+	// Remove all spaces and new lines from the JSON strings.
+	want = strings.Replace(want, "\t", "", -1)
+	want = strings.Replace(want, "\n", "", -1)
+
+	// Replace the "<" and ">" characters with their unicode escape sequences.
+	want = strings.Replace(want, "<", "\\u003c", -1)
+	want = strings.Replace(want, ">", "\\u003e", -1)
+
+	if !bytes.Equal(j, []byte(want)) {
+		t.Errorf("json.Marshal(%+v) returned %s, want %s", v, j, want)
 	}
 }
 
@@ -174,17 +209,7 @@ func testJSONMarshal(t *testing.T, v interface{}, want string) {
 func testAddURLOptions(t *testing.T, url string, v interface{}, want string) {
 	t.Helper()
 
-	vt := reflect.Indirect(reflect.ValueOf(v)).Type()
-	for i := 0; i < vt.NumField(); i++ {
-		field := vt.Field(i)
-		if alias, ok := field.Tag.Lookup("url"); ok {
-			if alias == "" {
-				t.Errorf("The field %+v has a blank url tag", field)
-			}
-		} else {
-			t.Errorf("The field %+v has no url tag specified", field)
-		}
-	}
+	testStructTags(t, v, "url")
 
 	got, err := addOptions(url, v)
 	if err != nil {
@@ -2657,7 +2682,10 @@ func TestBareDo_returnsOpenBody(t *testing.T) {
 }
 
 func TestErrorResponse_Marshal(t *testing.T) {
-	testJSONMarshal(t, &ErrorResponse{}, "{}")
+	testJSONMarshal(t, &ErrorResponse{}, `{
+		"message":"",
+		"errors":null
+	}`)
 
 	u := &ErrorResponse{
 		Message: "msg",
@@ -2677,20 +2705,20 @@ func TestErrorResponse_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"message": "msg",
-		"errors": [
+		"message":"msg",
+		"errors":[
 			{
-				"resource": "res",
-				"field": "f",
-				"code": "c",
-				"message": "msg"
+				"resource":"res",
+				"field":"f",
+				"code":"c",
+				"message":"msg"
 			}
 		],
-		"block": {
-			"reason": "reason",
-			"created_at": ` + referenceTimeStr + `
+		"block":{
+			"reason":"reason",
+			"created_at":` + referenceTimeStr + `
 		},
-		"documentation_url": "doc"
+		"documentation_url":"doc"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -2705,53 +2733,20 @@ func TestErrorBlock_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"reason": "reason",
-		"created_at": ` + referenceTimeStr + `
-	}`
-
-	testJSONMarshal(t, u, want)
-}
-
-func TestRateLimitError_Marshal(t *testing.T) {
-	testJSONMarshal(t, &RateLimitError{}, "{}")
-
-	u := &RateLimitError{
-		Rate: Rate{
-			Limit:     1,
-			Remaining: 1,
-			Reset:     Timestamp{referenceTime},
-		},
-		Message: "msg",
-	}
-
-	want := `{
-		"Rate": {
-			"limit": 1,
-			"remaining": 1,
-			"reset": ` + referenceTimeStr + `
-		},
-		"message": "msg"
-	}`
-
-	testJSONMarshal(t, u, want)
-}
-
-func TestAbuseRateLimitError_Marshal(t *testing.T) {
-	testJSONMarshal(t, &AbuseRateLimitError{}, "{}")
-
-	u := &AbuseRateLimitError{
-		Message: "msg",
-	}
-
-	want := `{
-		"message": "msg"
+		"reason":"reason",
+		"created_at":` + referenceTimeStr + `
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestError_Marshal(t *testing.T) {
-	testJSONMarshal(t, &Error{}, "{}")
+	testJSONMarshal(t, &Error{}, `{
+		"resource":"",
+		"field":"",
+		"code":"",
+		"message":""
+	}`)
 
 	u := &Error{
 		Resource: "res",
@@ -2761,17 +2756,21 @@ func TestError_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"resource": "res",
-		"field": "field",
-		"code": "code",
-		"message": "msg"
+		"resource":"res",
+		"field":"field",
+		"code":"code",
+		"message":"msg"
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestRate_Marshal(t *testing.T) {
-	testJSONMarshal(t, &Rate{}, "{}")
+	testJSONMarshal(t, &Rate{}, `{
+		"limit":0,
+		"remaining":0,
+		"reset":"0001-01-01T00:00:00Z"
+	}`)
 
 	u := &Rate{
 		Limit:     1,
@@ -2780,16 +2779,25 @@ func TestRate_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"limit": 1,
-		"remaining": 1,
-		"reset": ` + referenceTimeStr + `
+		"limit":1,
+		"remaining":1,
+		"reset":` + referenceTimeStr + `
 	}`
 
 	testJSONMarshal(t, u, want)
 }
 
 func TestRateLimits_Marshal(t *testing.T) {
-	testJSONMarshal(t, &RateLimits{}, "{}")
+	testJSONMarshal(t, &RateLimits{}, `{
+		"core":null,
+		"search":null,
+		"graphql":null,
+		"integration_manifest":null,
+		"source_import":null,
+		"code_scanning_upload":null,
+		"actions_runner_registration":null,
+		"scim":null
+	}`)
 
 	u := &RateLimits{
 		Core: &Rate{
@@ -2835,45 +2843,45 @@ func TestRateLimits_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"core": {
-			"limit": 1,
-			"remaining": 1,
-			"reset": ` + referenceTimeStr + `
+		"core":{
+			"limit":1,
+			"remaining":1,
+			"reset":` + referenceTimeStr + `
 		},
-		"search": {
-			"limit": 1,
-			"remaining": 1,
-			"reset": ` + referenceTimeStr + `
+		"search":{
+			"limit":1,
+			"remaining":1,
+			"reset":` + referenceTimeStr + `
 		},
-		"graphql": {
-			"limit": 1,
-			"remaining": 1,
-			"reset": ` + referenceTimeStr + `
+		"graphql":{
+			"limit":1,
+			"remaining":1,
+			"reset":` + referenceTimeStr + `
 		},
-		"integration_manifest": {
-			"limit": 1,
-			"remaining": 1,
-			"reset": ` + referenceTimeStr + `
+		"integration_manifest":{
+			"limit":1,
+			"remaining":1,
+			"reset":` + referenceTimeStr + `
 		},
-		"source_import": {
-			"limit": 1,
-			"remaining": 1,
-			"reset": ` + referenceTimeStr + `
+		"source_import":{
+			"limit":1,
+			"remaining":1,
+			"reset":` + referenceTimeStr + `
 		},
-		"code_scanning_upload": {
-			"limit": 1,
-			"remaining": 1,
-			"reset": ` + referenceTimeStr + `
+		"code_scanning_upload":{
+			"limit":1,
+			"remaining":1,
+			"reset":` + referenceTimeStr + `
 		},
-		"actions_runner_registration": {
-			"limit": 1,
-			"remaining": 1,
-			"reset": ` + referenceTimeStr + `
+		"actions_runner_registration":{
+			"limit":1,
+			"remaining":1,
+			"reset":` + referenceTimeStr + `
 		},
-		"scim": {
-			"limit": 1,
-			"remaining": 1,
-			"reset": ` + referenceTimeStr + `
+		"scim":{
+			"limit":1,
+			"remaining":1,
+			"reset":` + referenceTimeStr + `
 		}
 	}`
 

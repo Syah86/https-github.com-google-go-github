@@ -637,9 +637,7 @@ func TestPullRequestReviewDismissalRequest_Marshal(t *testing.T) {
 		Message: String("msg"),
 	}
 
-	want := `{
-		"message": "msg"
-	}`
+	want := `{"message":"msg"}`
 
 	testJSONMarshal(t, u, want)
 }
@@ -658,13 +656,13 @@ func TestDraftReviewComment_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"path": "path",
-		"position": 1,
-		"body": "body",
-		"start_side": "ss",
-		"side": "side",
-		"start_line": 1,
-		"line": 1
+		"path":"path",
+		"position":1,
+		"body":"body",
+		"start_side":"ss",
+		"side":"side",
+		"start_line":1,
+		"line":1
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -692,19 +690,19 @@ func TestPullRequestReviewRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"node_id": "nodeid",
-		"commit_id": "cid",
-		"body": "body",
-		"event": "event",
-		"comments": [
+		"node_id":"nodeid",
+		"commit_id":"cid",
+		"body":"body",
+		"event":"event",
+		"comments":[
 			{
-				"path": "path",
-				"position": 1,
-				"body": "body",
-				"start_side": "ss",
-				"side": "side",
-				"start_line": 1,
-				"line": 1
+				"path":"path",
+				"position":1,
+				"body":"body",
+				"start_side":"ss",
+				"side":"side",
+				"start_line":1,
+				"line":1
 			}
 		]
 	}`
@@ -748,35 +746,35 @@ func TestPullRequestReview_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"node_id": "nid",
-		"user": {
-			"login": "l",
-			"id": 1,
-			"avatar_url": "a",
-			"gravatar_id": "g",
-			"name": "n",
-			"company": "c",
-			"blog": "b",
-			"location": "l",
-			"email": "e",
-			"hireable": true,
-			"bio": "b",
-			"twitter_username": "t",
-			"public_repos": 1,
-			"followers": 1,
-			"following": 1,
-			"created_at": ` + referenceTimeStr + `,
-			"suspended_at": ` + referenceTimeStr + `,
-			"url": "u"
+		"id":1,
+		"node_id":"nid",
+		"user":{
+			"login":"l",
+			"id":1,
+			"avatar_url":"a",
+			"gravatar_id":"g",
+			"name":"n",
+			"company":"c",
+			"blog":"b",
+			"location":"l",
+			"email":"e",
+			"hireable":true,
+			"bio":"b",
+			"twitter_username":"t",
+			"public_repos":1,
+			"followers":1,
+			"following":1,
+			"created_at":` + referenceTimeStr + `,
+			"suspended_at":` + referenceTimeStr + `,
+			"url":"u"
 		},
-		"body": "body",
-		"submitted_at": ` + referenceTimeStr + `,
-		"commit_id": "cid",
-		"html_url": "hurl",
-		"pull_request_url": "prurl",
-		"state": "state",
-		"author_association": "aa"
+		"body":"body",
+		"submitted_at":` + referenceTimeStr + `,
+		"commit_id":"cid",
+		"html_url":"hurl",
+		"pull_request_url":"prurl",
+		"state":"state",
+		"author_association":"aa"
 	}`
 
 	testJSONMarshal(t, u, want)

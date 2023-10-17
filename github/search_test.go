@@ -571,8 +571,10 @@ func TestMatch_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"text": "txt",
-		"indices": [1]
+		"text":"txt",
+		"indices":[
+			1
+		]
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -595,14 +597,18 @@ func TestTextMatch_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"object_url": "ourl",
-		"object_type": "otype",
-		"property": "prop",
-		"fragment": "fragment",
-		"matches": [{
-			"text": "txt",
-			"indices": [1]
-		}]
+		"object_url":"ourl",
+		"object_type":"otype",
+		"property":"prop",
+		"fragment":"fragment",
+		"matches":[
+			{
+				"text":"txt",
+				"indices":[
+					1
+				]
+			}
+		]
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -624,15 +630,15 @@ func TestTopicResult_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"name": "name",
-		"display_name": "displayName",
-		"short_description": "shortDescription",
-		"description": "description",
-		"created_by": "createdBy",
-		"updated_at": "2021-10-26",
-		"featured": false,
-		"curated": true,
-		"score": 99.9
+		"name":"name",
+		"display_name":"displayName",
+		"short_description":"shortDescription",
+		"description":"description",
+		"created_by":"createdBy",
+		"updated_at":"2021-10-26",
+		"featured":false,
+		"curated":true,
+		"score":99.9
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -648,9 +654,13 @@ func TestRepositoriesSearchResult_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"total_count" : 0,
-		"incomplete_results" : true,
-		"items" : [{"id":1}]
+		"total_count":0,
+		"incomplete_results":true,
+		"items":[
+			{
+				"id":1
+			}
+		]
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -668,9 +678,13 @@ func TestCommitsSearchResult_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"total_count" : 0,
-		"incomplete_results" : true,
-		"items" : [{"sha" : "s"}]
+		"total_count":0,
+		"incomplete_results":true,
+		"items":[
+			{
+				"sha":"s"
+			}
+		]
 	}`
 
 	testJSONMarshal(t, c, want)
@@ -699,11 +713,11 @@ func TestTopicsSearchResult_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"total_count" : 2,
-		"incomplete_results" : false,
-		"items" : [
+		"total_count":2,
+		"incomplete_results":false,
+		"items":[
 			{
-				"name" : "t1",
+				"name":"t1",
 				"display_name":"tt",
 				"short_description":"t desc",
 				"description":"desc",
@@ -746,8 +760,10 @@ func TestLabelResult_Marshal(t *testing.T) {
 	testJSONMarshal(t, u, want)
 }
 
-func TestSearchOptions_Marshal(t *testing.T) {
-	testJSONMarshal(t, &SearchOptions{}, "{}")
+func TestSearchOptions_addOptions(t *testing.T) {
+	url := "some/path"
+
+	testAddURLOptions(t, url, &SearchOptions{}, url)
 
 	u := &SearchOptions{
 		Sort:      "author-date",
@@ -759,14 +775,7 @@ func TestSearchOptions_Marshal(t *testing.T) {
 		},
 	}
 
-	want := `{	
-		"sort": "author-date",
-		"order": "asc",
-		"page": 1,
-		"perPage": 10
-      }`
-
-	testJSONMarshal(t, u, want)
+	testAddURLOptions(t, url, u, url+`?order=asc&page=1&per_page=10&sort=author-date`)
 }
 
 func TestIssuesSearchResult_Marshal(t *testing.T) {
@@ -811,65 +820,65 @@ func TestIssuesSearchResult_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"total_count": 48,
-		"incomplete_results": false,
-		"items": [
+		"total_count":48,
+		"incomplete_results":false,
+		"items":[
 			{
-				"id": 1,
-				"number": 1,
-				"state": "s",
-				"locked": false,
-				"title": "title",
-				"body": "body",
-				"author_association": "aa",
-				"user": {
-					"id": 1
+				"id":1,
+				"number":1,
+				"state":"s",
+				"locked":false,
+				"title":"title",
+				"body":"body",
+				"author_association":"aa",
+				"user":{
+					"id":1
 				},
-				"labels": [
+				"labels":[
 					{
-						"id": 1
+						"id":1
 					}
 				],
-				"assignee": {
-					"id": 1
+				"assignee":{
+					"id":1
 				},
-				"comments": 1,
-				"closed_at": ` + referenceTimeStr + `,
-				"created_at": ` + referenceTimeStr + `,
-				"updated_at": ` + referenceTimeStr + `,
-				"closed_by": {
-					"id": 1
+				"comments":1,
+				"closed_at":` + referenceTimeStr + `,
+				"created_at":` + referenceTimeStr + `,
+				"updated_at":` + referenceTimeStr + `,
+				"closed_by":{
+					"id":1
 				},
-				"url": "url",
-				"html_url": "hurl",
-				"comments_url": "curl",
-				"events_url": "eurl",
-				"labels_url": "lurl",
-				"repository_url": "rurl",
-				"milestone": {
-					"id": 1
+				"url":"url",
+				"html_url":"hurl",
+				"comments_url":"curl",
+				"events_url":"eurl",
+				"labels_url":"lurl",
+				"repository_url":"rurl",
+				"milestone":{
+					"id":1
 				},
-				"pull_request": {
-					"url": "url"
+				"pull_request":{
+					"url":"url"
 				},
-				"repository": {
-					"id": 1
+				"repository":{
+					"id":1
 				},
-				"reactions": {
-					"total_count": 1
+				"reactions":{
+					"total_count":1
 				},
-				"assignees": [
+				"assignees":[
 					{
-						"id": 1
+						"id":1
 					}
 				],
-				"node_id": "nid",
-				"text_matches": [
+				"node_id":"nid",
+				"text_matches":[
 					{
-						"object_url": "ourl"
+						"object_url":"ourl"
 					}
 				],
-				"active_lock_reason": "alr"
+				"active_lock_reason":"alr"
 			}
 		]
 	}`
@@ -897,17 +906,17 @@ func TestLabelsSearchResult_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"total_count": 5,
-		"incomplete_results": false,
-		"items": [
+		"total_count":5,
+		"incomplete_results":false,
+		"items":[
 			{
-				"id": 1,
-				"url": "https://www.test-url.com",
-				"name": "test name",
-				"color": "green",
-				"default": true,
-				"description": "testDescription",
-				"score": 1
+				"id":1,
+				"url":"https://www.test-url.com",
+				"name":"test name",
+				"color":"green",
+				"default":true,
+				"description":"testDescription",
+				"score":1
 			}
 		]
 	}`
@@ -932,24 +941,24 @@ func TestCommitResult_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"sha": "test",
-		"commit": {
-		   "sha": "test"
+		"sha":"test",
+		"commit":{
+			"sha":"test"
 		},
-		"author": {
-		   "id": 1
+		"author":{
+			"id":1
 		},
-		"committer": {
-		   "id": 1
+		"committer":{
+			"id":1
 		},
-		"html_url": "hurl",
-		"url": "url",
-		"comments_url": "curl",
-		"repository": {
-		   "id": 1
+		"html_url":"hurl",
+		"url":"url",
+		"comments_url":"curl",
+		"repository":{
+			"id":1
 		},
-		"score": 123
-	 }`
+		"score":123
+	}`
 
 	testJSONMarshal(t, c, want)
 }
@@ -972,20 +981,20 @@ func TestUsersSearchResult_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"total_count": 2,
-		"incomplete_results": false,
-		"items": [
-		   {
-			  "login": "loginTest",
-			  "id": 1,
-			  "node_id": "NodeTest",
-			  "avatar_url": "AvatarURLTest",
-			  "html_url": "Hurl",
-			  "gravatar_id": "gravatarIDTest",
-			  "name": "nameTest"
-		   }
+		"total_count":2,
+		"incomplete_results":false,
+		"items":[
+			{
+				"login":"loginTest",
+				"id":1,
+				"node_id":"NodeTest",
+				"avatar_url":"AvatarURLTest",
+				"html_url":"Hurl",
+				"gravatar_id":"gravatarIDTest",
+				"name":"nameTest"
+			}
 		]
-	 }`
+	}`
 
 	testJSONMarshal(t, u, want)
 }
@@ -1000,9 +1009,13 @@ func TestCodeSearchResult_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"total_count" : 4,
-		"incomplete_results" : false,
-		"items" : [{"name": "n"}]
+		"total_count":4,
+		"incomplete_results":false,
+		"items":[
+			{
+				"name":"n"
+			}
+		]
 	}`
 
 	testJSONMarshal(t, u, want)

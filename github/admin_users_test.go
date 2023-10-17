@@ -185,8 +185,8 @@ func TestCreateUserRequest_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"login": "l",
-		"email": "e"
+		"login":"l",
+		"email":"e"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -201,9 +201,7 @@ func TestImpersonateUserOptions_Marshal(t *testing.T) {
 		},
 	}
 
-	want := `{
-		"scopes": ["s"]
-	}`
+	want := `{"scopes":["s"]}`
 
 	testJSONMarshal(t, u, want)
 }
@@ -218,9 +216,9 @@ func TestOAuthAPP_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"url": "u",
-		"name": "n",
-		"client_id": "cid"
+		"url":"u",
+		"name":"n",
+		"client_id":"cid"
 	}`
 
 	testJSONMarshal(t, u, want)
@@ -251,22 +249,24 @@ func TestUserAuthorization_Marshal(t *testing.T) {
 	}
 
 	want := `{
-		"id": 1,
-		"url": "u",
-		"scopes": ["s"],
-		"token": "t",
-		"token_last_eight": "tle",
-		"hashed_token": "ht",
-		"app": {
-			"url": "u",
-			"name": "n",
-			"client_id": "cid"
+		"id":1,
+		"url":"u",
+		"scopes":[
+			"s"
+		],
+		"token":"t",
+		"token_last_eight":"tle",
+		"hashed_token":"ht",
+		"app":{
+			"url":"u",
+			"name":"n",
+			"client_id":"cid"
 		},
-		"note": "n",
-		"note_url": "nu",
-		"updated_at": ` + referenceTimeStr + `,
-		"created_at": ` + referenceTimeStr + `,
-		"fingerprint": "f"
+		"note":"n",
+		"note_url":"nu",
+		"updated_at":` + referenceTimeStr + `,
+		"created_at":` + referenceTimeStr + `,
+		"fingerprint":"f"
 	}`
 
 	testJSONMarshal(t, u, want)
